@@ -34,7 +34,7 @@ const PostCard = ({ post }) => {
   const fetchUserImage = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/users/${post.user?._id}/image`, // Backend route for fetching user image
+        `https://community-hub-official.onrender.com/api/users/${post.user?._id}/image`, // Backend route for fetching user image
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -52,7 +52,7 @@ const PostCard = ({ post }) => {
   const handleFavorite = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/posts/${post._id}/favourite`,
+        `https://community-hub-official.onrender.com/api/posts/${post._id}/favourite`,
         {},
         {
           headers: {
@@ -72,7 +72,7 @@ const PostCard = ({ post }) => {
   const handleLike = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/posts/${post._id}/like`,
+        `https://community-hub-official.onrender.com/api/posts/${post._id}/like`,
         {},
         {
           headers: {
@@ -93,7 +93,7 @@ const PostCard = ({ post }) => {
   const handleUserClick = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/users/${post.user?._id}`, 
+        `https://community-hub-official.onrender.com/api/users/${post.user?._id}`, 
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
