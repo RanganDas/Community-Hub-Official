@@ -14,7 +14,7 @@ const MypostCard = ({ post, onDelete, onEdit }) => {
   const handleDelete = async () => {
     const token = localStorage.getItem("token");
     try {
-      await axios.delete(`http://localhost:5000/api/posts/${post._id}`, {
+      await axios.delete(`https://community-hub-official.onrender.com/api/posts/${post._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
