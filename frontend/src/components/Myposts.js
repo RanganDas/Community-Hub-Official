@@ -17,7 +17,7 @@ const Myposts = () => {
       navigate("/login"); // Redirect to login if user is not authenticated
     } else {
       axios
-        .get("http://localhost:5000/api/user/posts", {
+        .get("https://community-hub-official.onrender.com/api/user/posts", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
