@@ -15,7 +15,7 @@ const Activity = () => {
     const fetchUserId = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/auth/user",
+          "https://community-hub-official.onrender.com/api/auth/user",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -40,7 +40,7 @@ const Activity = () => {
       try {
         // Fetch liked post IDs
         const likedResponse = await axios.get(
-          `http://localhost:5000/api/users/liked/${userId}`,
+          `https://community-hub-official.onrender.com/api/users/liked/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -52,7 +52,7 @@ const Activity = () => {
 
         // Fetch full details of liked posts
         const postsResponse = await axios.post(
-          "http://localhost:5000/api/posts/details",
+          "https://community-hub-official.onrender.com/api/posts/details",
           { postIds },
           {
             headers: {
@@ -78,7 +78,7 @@ const Activity = () => {
     try {
       // Call backend to toggle like state
       const response = await axios.put(
-        `http://localhost:5000/api/posts/${postId}/like`,
+        `https://community-hub-official.onrender.com/api/posts/${postId}/like`,
         {},
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
