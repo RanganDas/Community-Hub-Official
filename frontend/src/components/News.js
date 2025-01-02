@@ -14,7 +14,7 @@ const News = () => {
     setIsLoading(true);
     setError(null);
     try {
-     const response = await axios.get('http://localhost:5000/api/news');
+     const response = await axios.get('https://community-hub-official.onrender.com/api/news');
       setArticles(response.data.articles);
     } catch (err) {
       setError("Failed to fetch news. Please try again later.");
