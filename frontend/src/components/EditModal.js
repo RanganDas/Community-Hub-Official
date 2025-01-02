@@ -21,7 +21,7 @@ const EditModal = ({ post, onClose, onUpdate }) => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/posts/${post._id}`,
+        `https://community-hub-official.onrender.com/api/posts/${post._id}`,
         { ...formData, hashtags: formData.hashtags.split(", ") },
         {
           headers: { Authorization: `Bearer ${token}` },
