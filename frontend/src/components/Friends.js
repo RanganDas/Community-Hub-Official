@@ -33,7 +33,7 @@ const Friends = () => {
         const token = localStorage.getItem("token");
 
         const response = await axios.get(
-          "http://localhost:5000/api/people/users",
+          "https://community-hub-official.onrender.com/api/people/users",
           {
             headers: {
               Authorization: `Bearer ${token}`,
