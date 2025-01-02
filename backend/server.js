@@ -1146,9 +1146,11 @@ app.get('/api/news', async (req, res) => {
     });
     res.json(response.data);
   } catch (error) {
+    console.error("Error fetching news:", error); // Log the error to the console
     res.status(500).json({ error: 'Failed to fetch news' });
   }
 });
+
 
 
 
