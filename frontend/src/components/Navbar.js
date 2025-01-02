@@ -37,7 +37,7 @@ const Navbar = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/count/notifications",
+        "https://community-hub-official.onrender.com/api/count/notifications",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
