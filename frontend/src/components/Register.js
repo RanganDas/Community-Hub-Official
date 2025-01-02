@@ -22,7 +22,7 @@ const Register = () => {
     if (password === confirmPassword) {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/register",
+          "https://community-hub-official.onrender.com/api/register",
           {
             username,
             email,
