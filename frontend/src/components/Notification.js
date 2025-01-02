@@ -6,7 +6,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 
-const socket = io("http://localhost:5000");
+const socket = io("https://community-hub-official.onrender.com");
 
 const Notification = () => {
   const [notifications, setNotifications] = useState([]);
@@ -19,7 +19,7 @@ const Notification = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "http://localhost:5000/notifications",
+          "https://community-hub-official.onrender.com/notifications",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -50,7 +50,7 @@ const Notification = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.delete(
-        `http://localhost:5000/notifications/${notificationId}`,
+        `https://community-hub-official.onrender.com/notifications/${notificationId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
