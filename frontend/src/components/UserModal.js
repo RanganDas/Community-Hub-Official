@@ -19,7 +19,7 @@ const UserModal = ({ userInfo, onClose, currentUserId }) => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:5000/user/${userInfo?._id}`,
+          `https://community-hub-official.onrender.com/user/${userInfo?._id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -40,7 +40,7 @@ const UserModal = ({ userInfo, onClose, currentUserId }) => {
   const handleFollow = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.post(`http://localhost:5000/follow/${userInfo?._id}`, null, {
+      await axios.post(`https://community-hub-official.onrender.com/follow/${userInfo?._id}`, null, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setIsFollowing(true); // Update state to reflect follow action
@@ -56,7 +56,7 @@ const UserModal = ({ userInfo, onClose, currentUserId }) => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        `http://localhost:5000/unfollow/${userInfo?._id}`,
+        `https://community-hub-official.onrender.com/unfollow/${userInfo?._id}`,
         null,
         { headers: { Authorization: `Bearer ${token}` } }
       );
