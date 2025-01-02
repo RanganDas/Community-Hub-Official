@@ -37,6 +37,11 @@ app.get("/", (req, res) => {
   res.send("Home page");
 });
 
+const PORT = process.env.PORT || 5000;
+server.listen(process.env.PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
 // Generate a 6-digit verification code
 const generateVerificationCode = () => {
   return Math.floor(100000 + Math.random() * 900000);
@@ -840,7 +845,7 @@ io.on("connection", (socket) => {
 });
 
 // Start the server
-const PORT = process.env.PORT;
+
 
 app.get("/notifications", authMiddleware, async (req, res) => {
   try {
@@ -890,9 +895,7 @@ app.delete(
   }
 );
 
-server.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+
 
 app.get("/api/count/notifications", authMiddleware, async (req, res) => {
   try {
