@@ -32,7 +32,7 @@ const Chatroom = () => {
   const [loading, setLoading] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [socket, setSocket] = useState(null);
-  const URL = "http://localhost:5000";
+  const URL = "https://community-hub-official.onrender.com";
 
   const fetchUserId = async () => {
     const token = localStorage.getItem("token");
