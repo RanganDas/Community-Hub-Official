@@ -15,8 +15,9 @@ const News = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `https://newsapi.org/v2/top-headlines?country=us&pageSize=40&apiKey=b508735890aa443dbc65da25a39253a1`
-      );
+  `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&pageSize=40&apiKey=b508735890aa443dbc65da25a39253a1`
+);
+
       setArticles(response.data.articles);
     } catch (err) {
       setError("Failed to fetch news. Please try again later.");
