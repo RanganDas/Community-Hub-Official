@@ -28,7 +28,7 @@ const PostModal = ({ isOpen, onClose, onPostCreated }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/posts/createpost",
+        "https://community-hub-official.onrender.com/api/posts/createpost",
         postData,
         {
           headers: { Authorization: `Bearer ${token}` },
