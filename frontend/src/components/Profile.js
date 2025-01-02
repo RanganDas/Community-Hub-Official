@@ -23,7 +23,7 @@ const Profile = () => {
   const fetchUserImage = async () => {
     try {
       const token = localStorage.getItem("token"); // Get the token from localStorage
-      const response = await axios.get("http://localhost:5000/api/user/image", {
+      const response = await axios.get("https://community-hub-official.onrender.com/api/user/image", {
         headers: {
           Authorization: `Bearer ${token}`, // Pass the token in the headers
         },
@@ -41,7 +41,7 @@ const Profile = () => {
       navigate("/login"); // Redirect to login if user is not authenticated
     } else {
       axios
-        .get("http://localhost:5000/api/user/profile", {
+        .get("https://community-hub-official.onrender.com/api/user/profile", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
