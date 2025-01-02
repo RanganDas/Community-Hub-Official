@@ -21,7 +21,7 @@ const Mycircle = () => {
   const fetchCircleData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/api/mycircle", {
+      const response = await axios.get("https://community-hub-official.onrender.com/api/mycircle", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setFollowing(response.data.following);
