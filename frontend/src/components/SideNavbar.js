@@ -20,7 +20,7 @@ const SideNavbar = () => {
   const fetchUserImage = async () => {
     try {
       const token = localStorage.getItem("token"); // Get the token from localStorage
-      const response = await axios.get("http://localhost:5000/api/user/image", {
+      const response = await axios.get("https://community-hub-official.onrender.com/api/user/image", {
         headers: {
           Authorization: `Bearer ${token}`, // Pass the token in the headers
         },
