@@ -1,0 +1,221 @@
+/* Modal Overlay */
+.unique-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Modal Content */
+.unique-modal-content {
+  background-color: #000000;
+  padding: 2rem;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 1px solid #00ffea;
+  z-index: 9999;
+  animation: move-gradient2 5s ease infinite; /* Smooth and slow animation */
+  box-shadow: 0 0 20px rgba(81, 255, 0, 0.6);
+}
+
+@keyframes move-gradient2 {
+  0% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 20px rgba(94, 255, 0, 0.6); /* Red */
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0 0 20px rgb(0, 163, 54); /* Blue */
+  }
+  100% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 20px rgb(9, 255, 0); /* Red */
+  }
+}
+
+/* Modal Title */
+.unique-modal-title {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+/* Input Fields */
+.unique-input-field,
+.unique-textarea-field {
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: #1d1d1d;
+  color: aliceblue;
+  border-bottom: 1px solid #4caf50;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+/* On Focus input fields */
+.unique-input-field:focus,
+.unique-textarea-field:focus {
+  color: aliceblue;
+  outline: none;
+  border-bottom: 2px solid #1e90ff; /* Change bottom border color on focus */
+  background-color: #0e0e0e; /* Slightly brighter background on focus */
+  box-shadow: none;
+}
+
+/* Textarea Styling */
+.unique-textarea-field {
+  height: 150px;
+  resize: none;
+}
+
+/* Image Preview Container */
+.unique-image-preview-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* Fixed Width and Height for Image */
+.unique-preview-image {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  border: #00acca 2px solid;
+}
+
+/* Submit Button */
+/* Center the button horizontally */
+/* Center the button horizontally */
+
+  
+/* Make sure the modal content is a flex container */
+.modal-content {
+    display: flex;
+    flex-direction: column;   /* Stack elements vertically */
+    justify-content: center;  /* Center the content vertically */
+    align-items: center;      /* Center the content horizontally */
+    width: 100%;              /* Ensure it takes full width */
+    height: auto;             /* Adjusts based on content */
+    padding: 2rem;            /* Optional: adjust padding to prevent content from touching edges */
+  }
+  
+  /* Make sure the submit button is centered */
+  .unique-submit-button {
+    background-color: #3e8bff00;
+    color: white;
+    padding: 12px 25px;
+    border: 1px solid #3e8bff;
+    
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;    /* Set the width of the button to 50% of the container */
+    text-align: center;  /* Ensure text inside button is centered */
+    margin-top: 1rem;    /* Optional: space from the top elements */
+    display: block;      /* Ensures it's treated as a block element */
+  }
+  
+  /* Optionally: remove any border or outline from input */
+  input, textarea {
+    border: 1px solid #ccc;
+    outline: none;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  input:focus, textarea:focus {
+    border-color: #3e8bff; /* Optional: change border color on focus */
+  }
+  
+
+/* Hover Effect for Submit Button */
+.unique-submit-button:hover {
+  background-color: #0059ff6a;
+}
+
+/* Active Effect for Submit Button */
+.unique-submit-button:active {
+  transform: scale(0.98);
+}
+
+/* Close Button */
+.unique-close-button {
+  background-color: #f4433600;
+  color: white;
+  padding: 12px 25px;
+  border: 1px solid #f44336;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+/* Close Button Hover */
+.unique-close-button:hover {
+  background-color: #fd000065;
+}
+
+/* Responsive Styling */
+@media (max-width: 600px) {
+  .unique-modal-content {
+    padding: 1.5rem;
+  }
+
+  .unique-input-field,
+  .unique-textarea-field,
+  .unique-submit-button,
+  .unique-close-button {
+    font-size: 0.9rem;
+  }
+}
+
+
+@media (max-width: 400px) {
+  .unique-modal-content {
+    margin-right: 10px ;
+    margin-left: 10px ;
+    z-index: 9999 !important;
+    max-width: 350px;
+  }
+  
+  .unique-preview-image {
+    max-width: 70%;
+    max-height: 150px;
+    
+  }
+  .unique-modal-title{
+    margin-bottom: 10px !important;
+  }
+  .unique-input-field, .unique-textarea-field{
+    margin-bottom: 10px !important;
+  }
+  .unique-close-button{
+    margin-top: 10px !important;
+    border-radius: 10px !important;
+  }
+  .unique-submit-button{
+    margin-top: 10px !important;
+    border-radius: 10px !important;
+  }
+}

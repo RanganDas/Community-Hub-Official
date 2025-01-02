@@ -1,0 +1,25 @@
+.favourite-posts-container {
+    padding: 20px;
+    background-color: #f4f4f9;
+    min-height: 100vh;
+  }
+  
+  .favorite-posts-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .favorite-posts-list p {
+    font-size: 1.2rem;
+    color: #888;
+    word-break: break-all;
+  }
+  
+  h2 {
+    color: #333;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  

@@ -1,0 +1,43 @@
+.activity-page {
+    padding: 20px;
+  }
+  
+  .activity-posts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #df67bf;
+    color: white;
+  }
+  
+  .navbar button {
+    padding: 10px 15px;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .navbar button:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .navbar h2 {
+    margin: 0;
+  }
+
+  .navbar-like{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .posts-container-100{
+    border: #df67bf solid 2px;
+  }

@@ -1,0 +1,133 @@
+/* Overall container for the users list */
+.user-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* Space between cards */
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #f4f7fa00; /* Light background for the page */
+    border-radius: 10px; /* Rounded corners for the page */
+  }
+  
+  /* Individual user card styling */
+  .user-card {
+    background-color: #292929; /* White background for cards */
+    border: 1px solid #00c1f1; /* Border with light color */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 250px; /* Set a fixed width for each card */
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .user-card:hover {
+    transform: translateY(-5px); /* Lift the card on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Enhance shadow on hover */
+  }
+  
+  /* Profile picture styles */
+  .user-card img {
+    width: 120px; /* Fixed width for images */
+    height: 120px; /* Fixed height for images */
+    object-fit: cover; /* Maintain aspect ratio and cover the area */
+    border-radius: 50%; /* Circle the profile picture */
+    margin-bottom: 15px; /* Space below the image */
+    border: 3px solid #d06aff; /* Light border around the image */
+  }
+  
+  /* Username styling */
+  .user-card h3 {
+    font-size: 20px;
+    font-weight: 600; /* Bold text */
+    margin: 10px 0;
+    color: #ffffff; /* Dark text color */
+  }
+  
+  /* Bio styling */
+  .user-card p {
+    font-size: 14px;
+    color: #b4b4b4; /* Lighter color for the bio text */
+    margin-bottom: 15px;
+    
+  }
+  
+  /* Search bar styling */
+  .search-bar {
+    color: #ffffff;
+    padding: 10px;
+    width: 300px;
+    text-align: center;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    margin-top: 100px;
+    background-color: #00c1f100;
+    
+  }
+
+  .search-bar:focus {
+    border-bottom: #00c1f1 2px solid;
+    
+  }
+  
+  /* Loading and error message styles */
+  .loading, .error {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 30px;
+  }
+  
+  /* Message when no users are found */
+  .no-results {
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+    margin-top: 20px;
+  }
+
+  /* Friends.css or FriendsNavbar.css */
+/* Full-width fixed navbar */
+.navbar10 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #252525;
+    color: white;
+    position: fixed; /* Make the navbar fixed at the top */
+    top: 0; /* Align it to the top of the page */
+    left: 0; /* Stretch it to the left edge */
+    width: 100%; /* Full width */
+    height: 60px; /* Set a fixed height for the navbar */
+    z-index: 1000; /* Ensure the navbar is above other content */
+  }
+  
+  /* Title styling */
+  .navbar-title {
+    font-size: 24px;
+    margin: 0; /* Remove default margin */
+  }
+  
+  /* Back button styling */
+  .back-btn {
+    background-color: #3a3a3a;
+    color: #ffffff;
+    border: none;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 4px;
+  }
+  
+  .back-btn:hover {
+    background-color: #000000;
+  }
+
+  
+  
+  
+  
+  

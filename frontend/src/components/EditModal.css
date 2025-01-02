@@ -1,0 +1,126 @@
+/* Modal Background */
+.edit-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+/* Modal Content */
+.edit-modal-content {
+  background: #0c0c0c;
+  border-radius: 10px;
+  padding: 20px;
+  width: 500px;
+  box-shadow: 0px 0px 30px rgba(41, 129, 132, 0.815);
+  animation: fadeIn 0.3s ease-in-out;
+  border: #34b4b4b0 solid 2px;
+}
+
+/* Title */
+.edit-modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Image Preview */
+.edit-modal-image-preview {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.edit-modal-image {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+/* Input Fields */
+.edit-modal-input,
+.edit-modal-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #2e2e2e;
+  color: azure;
+}
+
+.edit-modal-textarea {
+  height: 80px;
+  resize: none;
+}
+
+/* Buttons */
+.edit-modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-modal-button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.edit-modal-button.update {
+  background: #235b9f7f;
+  border: #286794c8 1px solid;
+  color: white;
+}
+
+.edit-modal-button.update:hover {
+  background: #195f98;
+}
+
+.edit-modal-button.cancel {
+  background: #aa29365b;
+  border: #971d299f 1px solid;
+  color: white;
+}
+
+.edit-modal-button.cancel:hover {
+  background: #dc3546d0;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .edit-modal-content {
+   
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px;
+    width: 400px;
+    
+  }
+}

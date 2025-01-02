@@ -1,0 +1,274 @@
+/* Modal overlay styling */
+.user-details-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.661);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 0.2s forwards;
+}
+
+/* Modal box */
+.user-details-modal {
+  background-color: rgb(36, 36, 36);
+  padding: 20px;
+  border: #2595b4 solid 2px;
+  box-shadow: #2595b4 0px 0px 30px;
+  border-radius: 10px;
+  width: 700px;
+  max-width: 90%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(30px); /* Start with the modal below */
+  opacity: 0;
+  animation: slideUp 0.2s ease-out forwards;
+  word-wrap: break-word;
+}
+
+/* Animation for fading in */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Animation for sliding up */
+@keyframes slideUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+/* Close button */
+.user-details-modal-close {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #ffffff;
+  background: #bd5e67;
+}
+
+/* Profile image container with purple border */
+.user-details-image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.user-details-modal-image {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 2px solid #6f42c1; /* Purple border */
+  object-fit: cover;
+}
+
+/* Stats layout for Followers and Following */
+.user-details-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.user-details-stat-box {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-count {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #888;
+}
+
+.user-details-ps p {
+  color: #ffffff;
+}
+
+/* Info section styling */
+.user-details-info h2 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.user-details-info p {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Button styling */
+.modal-details-action {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Follow button (Blue) */
+.modal-details-action.follow {
+  background-color: #007bff;
+  width: 200px; /* Width of the button */
+  margin: 30px auto 25px; /* Center horizontally with margin auto */
+  color: white;
+  display: block; /* Make it a block element to enable centering */
+}
+
+.modal-details-action.follow:hover {
+  background-color: #0056b3;
+}
+
+/* Unfollow button (Red) */
+.modal-details-action.unfollow {
+  background-color: #f06e65;
+  width: 200px; /* Width of the button */
+  margin: 30px auto 25px; /* Center horizontally with margin auto */
+  color: white;
+  display: block;
+}
+
+.modal-details-action.unfollow:hover {
+  background-color: #a71d2a;
+}
+
+.user-details-ps {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px; /* This will maintain consistent gap between each line */
+  padding: 15px;
+  margin: 0;
+  font-size: 16px; /* Set font size for text */
+  color: #ffffff; /* Ensure text color is white */
+}
+
+.user-details-ps p {
+  display: flex;
+  align-items: center; /* Aligns icons and text vertically */
+  gap: 15px; /* Adds space between the icon and the text */
+  margin: 0;
+  padding: 0;
+}
+
+.user-details-ps p .icon {
+  font-size: 15px; /* Adjust the size of the icons */
+  color: gray; /* Ensures that the icons are in gray */
+  
+}
+
+.user-details-ps p .span-text {
+  font-size: 16px; /* Sets text font size */
+  color: #cccccc; /* Lighter text color */
+}
+
+@media (max-width: 400px) {
+  .user-details-modal {
+    height: 85%;
+    margin-top: 60px;
+  }
+  .user-details-modal-close {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 5px;
+    right: 10px;
+    font-size: 25px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #959595;
+    background: #bd5e6700;
+  }
+  
+  /* Info section styling */
+  .user-details-info h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .user-details-info p {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .modal-details-action.follow {
+    background-color: #007bff;
+    width: 200px; /* Width of the button */
+    margin: px auto 25px; /* Center horizontally with margin auto */
+    color: white;
+    display: block; /* Make it a block element to enable centering */
+  }
+  .modal-details-action.unfollow {
+    background-color: #f06e65;
+    width: 200px; /* Width of the button */
+    margin: 30px auto 25px; /* Center horizontally with margin auto */
+    color: white;
+    display: block;
+    margin-bottom: 50px;
+  }
+  .user-details-ps {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px; /* This will maintain consistent gap between each line */
+    padding: 15px;
+    margin: 0;
+    font-size: 16px; /* Set font size for text */
+    color: #ffffff; /* Ensure text color is white */
+    border: #323232 solid 3px;
+    border-radius: 10px;
+  }
+  
+  .user-details-ps p {
+    display: flex;
+    align-items: center; /* Aligns icons and text vertically */
+    gap: 15px; /* Adds space between the icon and the text */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .user-details-ps p .icon {
+    font-size: 15px; /* Adjust the size of the icons */
+    color: gray; /* Ensures that the icons are in gray */
+    
+  }
+  
+  .user-details-ps p .span-text {
+    font-size: 13px; /* Sets text font size */
+    color: #b1b1b1; /* Lighter text color */
+  }
+}

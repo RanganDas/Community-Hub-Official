@@ -1,0 +1,230 @@
+/* Modal Backdrop (to block background interaction) */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.579);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  pointer-events: auto; /* Allow interaction with the modal */
+}
+
+/* Modal content container */
+.modal-content {
+  background-color: #212121;
+  text-align: center;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease;
+  pointer-events: auto; /* Ensure only modal content is interactable */
+  border: #2595b4 solid 2px;
+  box-shadow: #2595b4 0px 0px 30px;
+  word-wrap: break-word;
+}
+
+/* Modal Title */
+.modal-content h2 {
+  width: 100%;
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fcffcc;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #444;
+}
+
+/* Modal Text */
+.modal-content p {
+  width: 100%;
+  font-size: 16px;
+  color: #ffffff;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+}
+
+.modal-content p strong {
+  color: #ffffff;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Disable scrolling when the modal is open */
+body.modal-open {
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 15px;
+    max-width: 90%;
+  }
+
+  .modal-close {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
+
+  .modal-content h2 {
+    font-size: 20px;
+  }
+
+  .modal-content p {
+    font-size: 14px;
+  }
+}
+
+.follow-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 5px 0;
+}
+
+.followers,
+.following {
+  text-align: center;
+  background-color: #000000;
+  border-radius: 10px;
+  width: 100px;
+  height: 60px;
+  margin: 20px;
+}
+
+.followers p,
+.following p {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  padding-bottom: 10px;
+}
+
+.followers p .follower-count,
+.following p .follower-count {
+  margin-top: 10px;
+
+  padding-top: 10px;
+  text-align: center; /* This can override centering */
+}
+
+.follower-count {
+  color: rgb(255, 255, 255);
+  padding-top: 5px !important;
+  margin-top: 5px !important; /* Adding margin to the top */
+  display: block; /* Make sure it's a block-level element */
+  text-align: center;
+}
+
+.support-container {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  align-items: center;
+  gap: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.modal-action {
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-action.follow {
+  width: 100px;
+  background-color: #1f4b92a8;
+  border: #4070bda8 solid 1px;
+  color: white;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.modal-action.follow:hover {
+  background-color: #2568b4;
+}
+
+.modal-action.unfollow {
+  background-color: #1f4b92a8;
+  color: white;
+  height: 40px;
+  border-radius: 5px;
+  border: #4070bda8 solid 1px;
+}
+
+.modal-action.unfollow:hover {
+  background-color: #2568b4;
+}
+
+/* Close button styling */
+.modal-close {
+  width: 100px;
+  font-size: 1rem;
+  background-color: #8e303094;
+  border: #bd4040a8 solid 1px;
+  color: white;
+  border-radius: 5px;
+  height: 40px;
+  margin-left: 20px;
+}
+
+.modal-close:hover {
+  background-color: #d32f2f;
+}
+
+.user-details-section {
+  display: flex;
+  flex-direction: column;
+  
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid #373737;
+  border-radius: 8px;
+  width: 100%;
+  
+}
+
+.user-detail-section-div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-detail-section-div p {
+  margin: 0;
+  font-size: 16px;
+  color: gray;
+}
+
+
+
+
+@media (max-width: 400px) {
+  .modal-content {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .modal-content p {
+    font-size: 12px;
+    width: 80%;
+  }
+
+}

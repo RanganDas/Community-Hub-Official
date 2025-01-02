@@ -1,0 +1,128 @@
+/* Navbar Styles */
+.news-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #242424;
+    padding: 10px 20px;
+    height: 70px;
+    
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 15px;
+  }
+  
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+    gap: 20px;
+    margin: 20px; /* Space between cards */
+  }
+  
+  .news-card {
+    display: flex;
+    
+    flex-direction: column; /* Stack content vertically */
+    justify-content: flex-start; /* Push content upwards */
+    background-color: #202020;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    height: auto; /* Dynamic height based on content */
+    width: 100%; /* Full width within the grid */
+  }
+  
+  .news-card:hover {
+    transform: scale(1.05); /* Slight scale on hover */
+  }
+  
+  .news-image {
+    width: 100%;
+    height: auto; /* Proportional image */
+    object-fit: cover; /* Ensure image covers the area without distortion */
+  }
+  
+  .news-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1; /* Allows content to grow and fill available space */
+    padding: 15px;
+  }
+  
+  .news-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #ffffe9;
+  }
+  
+  .news-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Allows description to grow and take available space */
+  }
+  
+  .read-more {
+    font-size: 14px;
+    color: #63e6be;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: auto; /* Pushes the "Read more" link to the bottom */
+  }
+  
+  .read-more:hover {
+    text-decoration: underline;
+  }
+  
+  /* Add random sizes for each card */
+  .news-card.small {
+    grid-row-end: span 5; /* Smaller card */
+  }
+  
+  .news-back-button{
+    width: 150px;
+    border: #4e4e4e solid 2px;
+    border-radius: 10px;
+    padding: 5px;
+    height: 40px;
+    background: #2e2e2e;
+    color: #d7d7d7;
+    font-size: 16px;
+  }
+
+  .news-back-button:hover{
+    background: #000000;
+  }
+  
+  
+  .refresh-button {
+    width: 40px;
+    height: 40px;
+    background: none;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 20px 0;
+    text-align: center;
+    border: #6f6f6f solid 2px;
+  }
+  
+  .refresh-button:hover {
+    border: #6f6f6f solid 2px;
+    background: #171717;
+  }
+  
+  

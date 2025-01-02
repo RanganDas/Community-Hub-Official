@@ -1,0 +1,267 @@
+/* Global post card styles */
+.post-card {
+  background-color: #1e1e1e; /* Dark background */
+  color: #f1f1f1; /* Light text */
+  border-radius: 12px; /* Rounded corners */
+  border: 1px solid #333; /* Dark border */
+  padding: 20px;
+  margin: 15px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Soft shadow */
+  transition: all 0.3s ease; /* Smooth transition */
+  word-wrap: break-word;
+}
+
+.post-card:hover {
+  /* Hover lift effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7); /* Enhanced shadow on hover */
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #444; /* Line separating header from content */
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.post-username {
+  font-size: 13px;
+  color: #5fa9ff; /* Orange color for username */
+}
+
+.post-date {
+  font-size: 14px;
+  color: #aaa; /* Light gray date */
+}
+
+.post-image-container {
+  margin: 15px 0;
+  text-align: center;
+}
+
+.post-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.post-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.post-content {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #ddd;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.post-location,
+.post-hashtags {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.like-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.favourite-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.like-button {
+  background-color: #444; /* Dark background */
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  margin-right: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.like-button:hover {
+  background-color: #666; /* Lighter on hover */
+}
+
+.like-button.liked {
+  background-color: rgb(214, 85, 124); /* Red color when liked */
+}
+
+.like-count {
+  font-size: 16px;
+  color: #ffffff; /* Orange text for like count */
+}
+
+.post-hashtags {
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  color: #aaa;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Space between each hashtag box */
+  border-bottom: 1px solid #444;
+}
+.post-date2 {
+  font-family: "Arial", sans-serif; /* Add your preferred font */
+  font-size: 12px;
+  color: #8d8d8d; /* Set a color if needed */
+}
+
+.hashtag-box {
+  background-color: #333; /* Dark background for hashtag box */
+  color: #fff; /* White text */
+  padding: 5px 10px; /* Padding inside the box */
+  border-radius: 20px; /* Rounded corners for the box */
+  font-size: 14px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.hashtag-box:hover {
+  background-color: #ffa500; /* Change color on hover (light orange) */
+}
+
+/* Styling for post actions container */
+.post-actions {
+  display: flex;
+  width: 100%;
+  gap: 10px; /* Space between buttons */
+}
+
+/* Styling for each button */
+.action-btn {
+  flex: 1; /* Makes each button take equal space */
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: #5fa9ff 1.5px solid;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Specific styling for Edit button */
+.edit-btn {
+  background-color: #222222; /* Green for Edit */
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #1a1a1a; /* Darker green on hover */
+}
+
+/* Specific styling for Delete button */
+.delete-btn {
+  background-color: #291618; /* Red for Delete */
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #b64853; /* Darker red on hover */
+}
+
+.post-user-image {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%; /* Circular image */
+  margin-right: 8px;
+}
+
+a {
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+.post-username {
+  display: flex;
+  align-items: center; /* Vertically center the text and image */
+  gap: 3px; /* Space between the image and the username */
+}
+
+.post-user-image {
+  width: 25px; /* Adjust size of the image as needed */
+  height: 25px; /* Ensure the image is square */
+  object-fit: cover; /* Prevent image distortion */
+  border-radius: 50%; /* Make the image round */
+}
+
+@media (max-width: 400px) {
+  .post-card {
+    margin-top: 0;
+    padding: 10px;
+    box-sizing: border-box; /* Ensures padding and borders are included in width/height */
+    width: 100%; /* Restrict the card to the available width */
+    max-width: 400px; /* Set a maximum width for the card */
+    overflow-wrap: break-word; /* Allows long words or links to break into a new line */
+    word-wrap: break-word; /* Ensures compatibility for older browsers */
+    word-break: break-word; /* Forces long words to break */
+    border: 1px solid #303030; /* Optional: Add a border for better visibility */
+    border-radius: 10px; /* Optional: Rounded corners for aesthetic appeal */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+  }
+
+  .post-title {
+    font-size: 14px !important;
+    margin: 5px;
+    line-height: 1.2; /* Ensure line height for readability */
+    overflow: hidden; /* Hide overflowing content */
+  }
+
+  .post-content {
+    font-size: 12px !important;
+    margin: 5px;
+  }
+
+  .post-title,
+  .post-content {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal; /* Ensures text wraps to the next line */
+  }
+
+  .post-username {
+    font-size: 11px !important;
+
+    color: #5fa9ff; /* Orange color for username */
+  }
+  .post-image-container {
+    margin-bottom: 5px !important;
+    margin-top: 10px !important;
+  }
+
+  .post-location {
+    margin: 5px;
+    margin-top: 10px !important;
+    font-size: 10px !important;
+  }
+  .post-date2 {
+    font-family: "Arial", sans-serif; /* Add your preferred font */
+    font-size: 10px;
+    color: #8d8d8d; /* Set a color if needed */
+  }
+
+  .hashtag-box {
+    font-size: 11px !important;
+  }
+  .post-header {
+    padding-bottom: 5px !important;
+    margin-bottom: 5px !important;
+  }
+}

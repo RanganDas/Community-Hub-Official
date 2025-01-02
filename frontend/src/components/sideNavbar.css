@@ -1,0 +1,215 @@
+/* Right Sidebar Styles */
+.right-sidebar {
+    font-weight: 100;
+    background: #333;
+    color: #fff;
+    width: 40px; /* Initial width showing only the Menu text */
+    height: 100%;
+    padding-left: 20px;
+    position: fixed;
+    top: 0;
+    right: 0; /* Positioned on the right side */
+    z-index: 100;
+    box-shadow: -3px 0px 5px rgba(0, 0, 0, 0.2);
+    transition: width 0.3s ease; /* Smooth transition for width */
+  }
+  
+  .right-sidebar .sidebar-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(270deg);
+    font-weight: 800;
+    font-size: 18px;
+    text-align: center;
+    transition: opacity 0.3s ease;
+  }
+  
+  .right-sidebar .nav {
+    list-style-type: none;
+    padding-top: 40px;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease;
+  }
+  
+  .right-sidebar .nav li {
+    padding-bottom: 20px;
+  }
+  
+  .right-sidebar .nav a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+  }
+  
+  .right-sidebar .nav a:hover {
+    color: #aaa;
+  }
+  
+  /* Hover effect: when the sidebar is hovered, it expands and shows more content */
+  .right-sidebar:hover {
+    width: 250px; /* Expanded width */
+  }
+  
+  .right-sidebar:hover .sidebar-title {
+    opacity: 0; /* Hide the Menu text on hover */
+  }
+  
+  .right-sidebar:hover .nav {
+    opacity: 1; /* Show the menu items */
+  }
+
+  /* Circular profile image */
+.profile-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px; /* Width of the image */
+    height: 150px; /* Equal height to maintain the circle */
+    border-radius: 50%; /* Make the image circular */
+    object-fit: cover; /* Ensure the image covers the circle area without stretching */
+    border: 2px solid #c9abfa; 
+    display: block; 
+    margin: 0 auto; 
+    margin-right: 50px;
+    max-width: 100%; 
+    max-height: 100%; 
+  }
+  
+  /* Hover effect for the profile image (optional) */
+  .profile-image:hover {
+    transform: scale(1.1); /* Zoom effect when hovered */
+    transition: transform 0.3s ease; /* Smooth transition */
+  }
+  
+  /* Styling for the logged-in menu */
+  .logged-in-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .logged-in-menu li {
+    margin: 10px 0;
+  }
+  
+  .logged-in-menu li button {
+    justify-content: center;
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    
+  }
+  /* Container for the profile image */
+.profile-image-container {
+    text-align: center; /* Center-align the image */
+    margin-bottom: 15px; /* Space below the profile image */
+  }
+
+
+
+/* CSS */
+.profile-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  color: aliceblue;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 200px;
+}
+
+.profile-buttons:after {
+  content: "";
+  background-color: #a182ff;
+  border-radius: 8px;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.profile-buttons:hover:after {
+  top: 0px;
+  left: 0px;
+}
+
+.profile-username {
+  color: white; /* Correct */
+  font-size: 24px; /* Correct */
+  text-align: center; /* Correct */
+  font-weight: bold; /* Correct property for bold text */
+  margin-right: 20px !important; /* Correct */
+}
+.sidebar-p1, .sidebar-p2{
+  display: flex;
+  justify-content: center;
+  width: 210px;
+  align-items: center;
+  text-align: center;
+  font-size: 13px;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  color: gray;
+}
+
+@media (min-width: 768px) {
+  .profile-buttons {
+    padding: 13px 50px 13px;
+  }
+}
+
+@media (max-width: 400px) {
+  .right-sidebar {
+    z-index: 1;
+    background: #212030;
+    border-left: #4d4d4d solid 1px;
+  }
+  .profile-image {
+    margin-top: 50px;
+  }
+  .logged-in-menu li button {
+    justify-content: center;
+    width: 80%;
+    padding: 10px;
+    
+    
+  }
+ 
+  .logged-in-menu li {
+    margin-left: 20px;
+  }
+  .profile-username {
+    margin-right: 40px !important; /* Correct */
+  }
+  .sidebar-p1{
+    margin-top: 50px;
+    
+  }
+  
+  .right-sidebar {
+    font-weight: 80;
+    width: 20px; 
+  }
+  
+  .right-sidebar .sidebar-title {
+    font-weight: 500;
+    font-size: 14px;
+    
+  }
+}

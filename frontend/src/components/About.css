@@ -1,0 +1,87 @@
+/* General Page Styles */
+.about-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  /* Cover Section */
+  .about-cover {
+    width: 100%;
+    height: 200px;
+    background: url("./cover.png") center/cover no-repeat;
+    margin-bottom: 20px;
+  }
+  
+  /* Heading Section */
+  .about-heading {
+    text-align: center;
+    font-size: 30px;
+    margin: 20px 0;
+    color: #62cde5;
+  }
+  
+  /* Description Section */
+  .about-description {
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #353535;
+    border-radius: 8px;
+    background-color: #202020;
+    color: #ddd;
+    font-size: 16px;
+    line-height: 1.5;
+    width: 70%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Footer Section */
+  .about-footer {
+    margin-top: auto;
+    background-color: #282828;
+    color: #f9f9f9;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  .about-footer p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .social-icons {
+    margin-top: 5px;
+  }
+  
+  .social-icons a {
+    margin: 0 10px;
+    color: #f9f9f9;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .social-icons a:hover {
+    color: #4caf50;
+  }
+
+  @media (max-width: 400px) {
+    .about-heading {
+      
+      font-size: 20px;
+      
+    }
+    .about-description {
+      
+      padding: 10px;
+      color: #b4b4b4;
+      font-size: 12px;
+      line-height: 1.5;
+      width: 90%;
+      margin-bottom: 20px;
+      word-wrap: break-word;
+    }
+  }
+  

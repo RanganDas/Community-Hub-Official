@@ -1,0 +1,243 @@
+.chatroom-container-wrapper {
+  margin: 50px; /* You can adjust or remove this margin */
+  border: #363636 solid 2px;
+  box-sizing: border-box; /* Include border in width/height */
+  height: calc(100vh - 100px); /* Reduce height to account for margin */
+  width: calc(100vw - 100px); /* Reduce width to account for margin */
+  
+}
+
+.chatroom-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding/borders don't affect width/height */
+}
+
+
+
+.chatroom-sidebar {
+  width: 25%;
+  background-color: #1b1b1b;
+  padding: 20px;
+  border-right: 2px solid #363636;
+}
+
+.chatroom-sidebar h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: rgb(59, 59, 59) solid 1px;
+}
+
+.chatroom-sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.chatroom-sidebar li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #292929;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chatroom-sidebar li:hover {
+  border: 1px solid #007bff;
+}
+
+.chatroom-sidebar .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chatroom-main {
+  flex: 1;
+  padding-top: 7px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+}
+
+
+.chatroom-messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.message {
+  position: relative; /* Required for positioning the timestamp */
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  max-width: 70%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.sent {
+  background: linear-gradient(45deg, #63096e, #4b00fa);
+  align-self: flex-end;
+  text-wrap: balance; /* You can remove this since it's not standard */
+  max-width: 500px; /* Limit width of message box */
+  text-align: left;
+  word-wrap: break-word; /* Break words if they overflow */
+  overflow-wrap: break-word; /* Same as word-wrap */
+  margin-left: 60%;
+  margin-right: 4%;
+  border-radius: 10px 30px 30px 10px;
+}
+
+.received {
+  background: linear-gradient(45deg, #8d3901, #530000);
+  align-self: flex-start;
+  margin-right: 60%;
+  text-align: left;
+  max-width: 500px; /* Limit width of message box */
+  word-wrap: break-word; /* Break words if they overflow */
+  overflow-wrap: break-word; /* Same as word-wrap */
+  border-radius: 30px 10px 10px 30px;
+}
+.message p {
+  margin: 10px 10px 10px 10px; /* Add space between text and timestamp */
+}
+
+.message span {
+  position: absolute; /* Position relative to the message bubble */
+  bottom: 5px; /* Position near the bottom of the bubble */
+  right: 10px; /* Slight padding from the right edge */
+  font-size: 10px; /* Smaller font for timestamp */
+  color: #a5a4a4; /* Light color for timestamp text */
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+
+
+
+.chatroom-header {
+  position: relative; /* Set relative positioning for absolute child positioning */
+  display: flex;
+  align-items: center; /* Vertically center items */
+  padding: 20px 20px;
+  background-color: #2b2b2b00;
+  color: white;
+  border-bottom: 1px solid #444;
+  margin-bottom: 10px;
+  
+}
+
+.chatroom-header h3 {
+  margin: 0;
+  font-size: 15px;
+  flex: 1; /* Allow the title to take remaining space */
+  top: 50%;
+}
+
+.delete-chat-btn {
+  position: absolute; /* Position it relative to the header container */
+  right: 70px; /* Distance from the right edge */
+  transform: translateY(-50%); /* Adjust for vertical alignment */
+  background: none;
+  border: none;
+  color: #ff4d4d;
+  font-size: 15px;
+  top: 50%;
+  cursor: pointer;
+  padding: 5px; /* Add padding for better clickability */
+}
+
+.call-chat-btn {
+  position: absolute; /* Position it relative to the header container */
+  right: 130px; /* Distance from the right edge */
+  transform: translateY(-50%); /* Adjust for vertical alignment */
+  background: none;
+  border: none;
+  
+  font-size: 15px;
+  top: 50%;
+  cursor: pointer;
+  padding: 5px; /* Add padding for better clickability */
+}
+
+.video-chat-btn {
+  position: absolute; /* Position it relative to the header container */
+  right: 190px; /* Distance from the right edge */
+  transform: translateY(-50%); /* Adjust for vertical alignment */
+  background: none;
+  border: none;
+  
+  font-size: 15px;
+  top: 50%;
+  cursor: pointer;
+  padding: 5px; /* Add padding for better clickability */
+}
+
+
+.chatroom-input {
+  display: flex; /* Align children in a row */
+  align-items: center; /* Vertically center items */
+  position: relative; /* Needed for emoji picker positioning */
+}
+
+.chatroom-input input {
+  flex: 1;
+  font-size: 16px;
+  height: 60PX;
+  border-radius: 20px;
+  background: #1b1b1b;
+  border: none;
+  color: aliceblue;
+  padding: 20px;
+  margin: 0;
+
+}
+
+.chatroom-input .chat-send-btn {
+  margin: 15px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #5c5c5c;
+  color: white;
+  border: none;
+  cursor: pointer;
+  
+}
+
+.chatroom-input .chat-send-btn:hover {
+  background-color: rgb(50, 50, 50);
+}
+.chatroom-input .emoji-btn {
+  background: none;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+  margin: 15px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+.chatroom-input .emoji-picker {
+  position: absolute; /* Position relative to .chatroom-input */
+  bottom: 80px; /* Adjust to move it above the input */
+  left: 0; /* Align to the left edge of the input field */
+  z-index: 1000; /* Ensure it appears on top */
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}

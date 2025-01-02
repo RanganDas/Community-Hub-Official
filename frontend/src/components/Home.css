@@ -1,0 +1,150 @@
+.posts-container {
+  display: flex;
+  flex-direction: column; /* Stack posts vertically */
+  justify-content: center;
+  align-items: center; /* Center posts horizontally */
+  margin-top: 60px; /* Adjust based on your navbar's height */
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.posts-container2 {
+  margin-top: 30px;
+  width: 1000px; /* Fixed width for larger screens */
+  max-width: 100%; /* Ensures it is responsive */
+  border: 2px solid #303030;
+  border-radius: 15px;
+  margin-bottom: 20px; /* Add spacing between the post cards */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.posts-container3 {
+  margin-top: 5px;
+  width: 540px; /* Fixed width for larger screens */
+  max-width: 100%;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 7px; /* Width for vertical scrollbars */
+  height: 12px; /* Height for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: #000000; /* Light gray background */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c76e1a; /* Green color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #5b58fc; /* Slightly darker green on hover */
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .posts-container2 {
+    width: 90%; /* Reduce width to fit smaller screens */
+    margin-top: 20px;
+    border: 1px solid #303030;
+    padding: 10px;
+  }
+
+  .posts-container3 {
+    width: 100%; /* Use full width for smaller screens */
+    margin-top: 10px;
+    padding: 5px;
+  }
+
+  /* Adjust scrollbar size for smaller screens */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #8c6a1a; /* Adjust color for visibility */
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  background-color: #6a6a6a68;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.pagination button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 16px;
+}
+
+/* Media query for very small devices */
+@media (max-width: 400px) {
+  .posts-container {
+    margin-top: 40px;
+  }
+  .posts-container2 {
+    width: 95%; /* Further reduce width for smaller devices */
+    margin-right: 50px;
+    margin-top: 0;
+  }
+
+  .posts-container3 {
+    width: 100%; /* Full width */
+    margin-top: 0;
+  }
+
+  button {
+    font-size: 12px; /* Adjust button text size for small screens */
+    padding: 8px; /* Smaller button padding */
+  }
+  /* Scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 7px; /* Width for vertical scrollbars */
+    height: 12px; /* Height for horizontal scrollbars */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #00000000; /* Light gray background */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #c76e1a00; /* Green color */
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #55555500; /* Slightly darker green on hover */
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+}
