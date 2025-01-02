@@ -27,7 +27,7 @@ const StoryFeed = () => {
       try {
         const token = localStorage.getItem("token");
         const { data } = await axios.get(
-          "http://localhost:5000/api/stories/following",
+          "https://community-hub-official.onrender.com/api/stories/following",
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
@@ -57,7 +57,7 @@ const StoryFeed = () => {
     try {
       const token = localStorage.getItem("token");
       const { data } = await axios.get(
-        "http://localhost:5000/api/stories/following",
+        "https://community-hub-official.onrender.com/api/stories/following",
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -106,7 +106,7 @@ const StoryFeed = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/stories/${storyId}`, {
+      await axios.delete(`https://community-hub-official.onrender.com/api/stories/${storyId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
