@@ -289,6 +289,7 @@ app.post("/api/posts/createpost", authMiddleware, async (req, res) => {
 
 // Get all posts
 app.get("/api/posts/getposts", async (req, res) => {
+  console.log("GET /api/posts/getposts called with query:", req.query);
   try {
     const page = parseInt(req.query.page) || 1; // Default to page 1 if no page is specified
     const limit = 10; // Number of posts per page
