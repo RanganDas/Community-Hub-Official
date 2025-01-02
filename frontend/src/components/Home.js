@@ -13,20 +13,24 @@ const Home = () => {
   const [totalPages, setTotalPages] = useState(1); // Track total pages
 
   // Fetch posts from the backend with pagination
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get(
-          `https://community-hub-official.onrender.com/posts/getposts?page=${currentPage}`
-        );
-        setPosts(response.data.posts);
-        setTotalPages(response.data.totalPages); // Set total pages from the backend response
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    };
-    fetchPosts();
-  }, [currentPage]); // Refetch posts when the current page changes
+ useEffect(() => {
+  const fetchPosts = async () => {
+    try {
+      const response = await axios.get(
+        currentPage === 0
+          ? `https://community-hub-official.onrender.com/api/posts/getposts` // Fetch all posts
+          : `https://community-hub-official.onrender.com/api/posts/getposts?page=${currentPage}` // Fetch paginated posts
+      );
+      setPosts(response.data.posts);
+      setTotalPages(response.data.totalPages || 1); // Handle totalPages for both cases
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
+
+  fetchPosts();
+}, [currentPage]);
+
 
   // Handle new post creation
   const handlePostCreated = (newPost) => {
@@ -58,24 +62,26 @@ const Home = () => {
         </div>
       </div>
 
-     {/* Only show pagination if there are more than 10 posts */}
-     {totalPages > 1 && posts.length > 0 && (
-        <div className="pagination">
-          {currentPage > 1 && (
-            <button onClick={() => setCurrentPage(currentPage - 1)}>
-              Previous
-            </button>
-          )}
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
-          {currentPage < totalPages && (
-            <button onClick={() => setCurrentPage(currentPage + 1)}>
-              Next
-            </button>
-          )}
-        </div>
-      )}
+      {/* Show pagination only if there are multiple pages */}
+    {totalPages > 1 && (
+      <div className="pagination">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
+    )}
     </div>
   );
 };
