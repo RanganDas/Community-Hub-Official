@@ -35,7 +35,7 @@ const MobileChat = () => {
   const handleMouseLeave2 = () => setIsHovered2(false);
   const [onlineUsers, setOnlineUsers] = useState([]);
 
-  const URL = "http://localhost:5000";
+  const URL = "https://community-hub-official.onrender.com";
 
   useEffect(() => {
     const newSocket = io(`${URL}`);
