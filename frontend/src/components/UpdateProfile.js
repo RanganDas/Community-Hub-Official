@@ -46,7 +46,7 @@ const UpdateProfile = () => {
     const token = localStorage.getItem("token");
 
     axios
-      .put("http://localhost:5000/api/user/profile/update", userData, {
+      .put("https://community-hub-official.onrender.com/api/user/profile/update", userData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
