@@ -17,7 +17,7 @@ const Home = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/posts/getposts?page=${currentPage}`
+          `https://community-hub-official.onrender.com/posts/getposts?page=${currentPage}`
         );
         setPosts(response.data.posts);
         setTotalPages(response.data.totalPages); // Set total pages from the backend response
