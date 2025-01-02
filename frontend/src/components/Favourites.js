@@ -14,7 +14,7 @@ const Favourites = () => {
     const fetchUserId = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/auth/user",
+          "https://community-hub-official.onrender.com/api/auth/user",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -38,7 +38,7 @@ const Favourites = () => {
     const fetchFavoritePosts = async () => {
       try {
         const favoriteResponse = await axios.get(
-          `http://localhost:5000/api/users/favorites/${userId}`,
+          `https://community-hub-official.onrender.com/api/users/favorites/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -49,7 +49,7 @@ const Favourites = () => {
         const postIds = favoriteResponse.data;
 
         const postsResponse = await axios.post(
-          "http://localhost:5000/api/posts/details",
+          "https://community-hub-official.onrender.com/api/posts/details",
           { postIds },
           {
             headers: {
@@ -74,7 +74,7 @@ const Favourites = () => {
   const handleFavoriteToggle = async (postId) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/posts/${postId}/favourite`,
+        `https://community-hub-official.onrender.com/api/posts/${postId}/favourite`,
         {},
         {
           headers: {
