@@ -21,7 +21,7 @@ const StoryModal = ({ onClose, onStoryAdded }) => {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/stories",
+        "https://community-hub-official.onrender.com/api/stories",
         payload,
         {
           headers: {
