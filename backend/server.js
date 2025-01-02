@@ -788,7 +788,7 @@ const server = http.createServer(app);
 // Initialize Socket.IO server
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", // Replace with your frontend URL
+    origin: "https://community-hub-ten.vercel.app", // Replace with your frontend URL
     methods: ["GET", "POST"],
   },
 });
