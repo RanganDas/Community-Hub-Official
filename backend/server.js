@@ -1138,7 +1138,7 @@ app.get("/api/users/liked/:userId", authMiddleware, async (req, res) => {
 
 app.get('/api/news', async (req, res) => {
   try {
-    const response = await axios.get('https://newsapi.org/v2/top-headlines?country=us&pageSize=40&apiKey=b508735890aa443dbc65da25a39253a1', {
+    const response = await axios.get('https://newsapi.org/v2/top-headlines', {
       params: {
         country: 'us',
         pageSize: 40,
