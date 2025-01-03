@@ -14,14 +14,16 @@ const News = () => {
     setIsLoading(true);
     setError(null);
     try {
-     const response = await axios.get('https://community-hub-official.onrender.com/api/news');
+      const response = await axios.get('https://community-hub-official.onrender.com/api/news');
       setArticles(response.data.articles);
     } catch (err) {
+      console.error("Frontend Error:", err); // Log frontend error
       setError("Failed to fetch news. Please try again later.");
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   useEffect(() => {
     fetchNews();

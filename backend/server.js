@@ -1142,15 +1142,17 @@ app.get('/api/news', async (req, res) => {
       params: {
         country: 'us',
         pageSize: 40,
-        apiKey: 'b508735890aa443dbc65da25a39253a1'
-      }
+        apiKey: 'b508735890aa443dbc65da25a39253a1',
+      },
     });
+    console.log("NewsAPI Response:", response.data); // Log the API response
     res.json(response.data);
   } catch (error) {
-    console.error("Error fetching news:", error); // Log the error to the console
+    console.error("Error fetching news:", error.response?.data || error.message);
     res.status(500).json({ error: 'Failed to fetch news' });
   }
 });
+
 
 
 
