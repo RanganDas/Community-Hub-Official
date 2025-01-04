@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Chatroom.css";
 import { useNavigate } from "react-router-dom";
@@ -33,9 +33,9 @@ const Chatroom = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [socket, setSocket] = useState(null);
 
-  const [isTyping, setIsTyping] = useState(false);
-  const [typingUser, setTypingUser] = useState(null);
-  const typingTimeout = useRef(null);
+  const [isTyping, setIsTyping] = useState(false); // New state for typing indicator
+  const [typingUser, setTypingUser] = useState(null); // To track which user is typing
+
 
   const URL = "https://community-hub-official.onrender.com";
 
@@ -61,42 +61,10 @@ const Chatroom = () => {
     newSocket.on("userStatusUpdate", (onlineUserIds) => {
       setOnlineUsers(onlineUserIds);
     });
-
-    newSocket.on("userTyping", ({ senderId }) => {
-      if (senderId !== userId) {
-        setTypingUser(senderId);
-        setIsTyping(true);
-      }
-    });
-
-    newSocket.on("stopTyping", ({ senderId }) => {
-      if (senderId !== userId) {
-        setTypingUser(null);
-        setIsTyping(false);
-      }
-    });
-
     return () => {
       newSocket.disconnect();
     };
   }, [userId, URL]);
-
-  const handleInputChange = (e) => {
-    setMessage(e.target.value);
-
-    // Emit typing event
-    if (socket && activeChat) {
-      socket.emit("typing", { senderId: userId, receiverId: activeChat });
-
-      if (typingTimeout.current) {
-        clearTimeout(typingTimeout.current);
-      }
-
-      typingTimeout.current = setTimeout(() => {
-        socket.emit("stopTyping", { senderId: userId, receiverId: activeChat });
-      }, 1000);
-    }
-  };
 
   const fetchFollowers = async () => {
     const token = localStorage.getItem("token");
@@ -147,13 +115,14 @@ const Chatroom = () => {
       };
 
       socket.emit("sendMessage", newMessage);
-      socket.emit("stopTyping", { senderId: userId, receiverId: activeChat });
 
       setMessages((prevMessages) => [
         ...prevMessages,
         { ...newMessage, createdAt: new Date() },
       ]);
       setMessage("");
+      setIsTyping(false); // Stop typing indicator after message is sent
+      socket.emit("stopTyping", { senderId: userId, receiverId: activeChat });
     }
   };
 
@@ -226,6 +195,30 @@ const Chatroom = () => {
     }
   }, [userId, activeChat]);
 
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("receiveMessage", (newMessage) => {
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+      });
+  
+      socket.on("typing", (userId) => {
+        if (userId !== activeChat) return; // Only show typing indicator if it's for the active chat
+        setTypingUser(userId); // Set the typing user for the active chat
+      });
+  
+      socket.on("stopTyping", (userId) => {
+        if (userId === activeChat) {
+          setTypingUser(null); // Stop showing the typing indicator when the user stops typing
+        }
+      });
+    }
+  }, [socket, activeChat, userId]);  // Make sure to include the relevant dependencies
+  
+
+
+  
+
   return (
     <div className="chatroom-container-wrapper">
       <div className="chatroom-container">
@@ -287,7 +280,9 @@ const Chatroom = () => {
                     color: onlineUsers.includes(activeChat) ? "green" : "red",
                   }}
                 >
-                  {onlineUsers.includes(activeChat) ? "Online" : "Offline"}
+                  {onlineUsers.includes(activeChat)
+                    ? "Online"
+                    : "Offline"}
                 </span>
               </div>
 
@@ -303,14 +298,13 @@ const Chatroom = () => {
                     <span>{new Date(msg.createdAt).toLocaleTimeString()}</span>
                   </div>
                 ))}
+                {typingUser && typingUser !== userId && (
+                  <div className="typing-indicator">
+                    <span>Typing...</span>
+                  </div>
+                )}
               </div>
-              {/* Typing Indicator */}
-              {isTyping && typingUser === activeChat && (
-                <div className="typing-indicator">
-                  {mutualFollowers.find((f) => f._id === typingUser)?.username}{" "}
-                  is typing...
-                </div>
-              )}
+
               <div className="chatroom-input">
                 <button
                   className="emoji-btn"
