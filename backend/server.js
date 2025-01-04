@@ -829,6 +829,18 @@ io.on("connection", (socket) => {
     }
   });
 
+
+  socket.on("typing", ({ senderId, receiverId }) => {
+    socket.to(receiverId).emit("userTyping", { senderId });
+  });
+  
+  socket.on("stopTyping", ({ senderId, receiverId }) => {
+    socket.to(receiverId).emit("stopTyping", { senderId });
+  });
+  
+
+
+
   // Handle disconnection
   socket.on("disconnect", () => {
     for (const [userId, socketId] of onlineUsers.entries()) {
