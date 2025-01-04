@@ -185,7 +185,7 @@
   }
   .logged-in-menu li button {
     justify-content: center;
-    width: 60%;
+    width: 80%;
     padding: 10px;
     
     
@@ -193,6 +193,8 @@
  
   .logged-in-menu li {
     margin-left: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
   }
   .profile-username {
     margin-right: 40px !important; /* Correct */
@@ -212,5 +214,4 @@
     font-size: 14px;
     
   }
- 
 }
