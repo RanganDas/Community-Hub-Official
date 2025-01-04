@@ -32,13 +32,6 @@ const Chatroom = () => {
   const [loading, setLoading] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [socket, setSocket] = useState(null);
-
-  const [isTyping, setIsTyping] = useState(false);
-  const [typingUser, setTypingUser] = useState(null);
-  const typingTimeout = useRef(null);
-
-
-
   const URL = "https://community-hub-official.onrender.com";
 
   const fetchUserId = async () => {
@@ -63,43 +56,10 @@ const Chatroom = () => {
     newSocket.on("userStatusUpdate", (onlineUserIds) => {
       setOnlineUsers(onlineUserIds);
     });
-
-    newSocket.on("userTyping", ({ senderId }) => {
-      if (senderId !== userId) {
-        setTypingUser(senderId);
-        setIsTyping(true);
-      }
-    });
-
-    newSocket.on("stopTyping", ({ senderId }) => {
-      if (senderId !== userId) {
-        setTypingUser(null);
-        setIsTyping(false);
-      }
-    });
-
     return () => {
       newSocket.disconnect();
     };
   }, [userId, URL]);
-
-
-  const handleInputChange = (e) => {
-    setMessage(e.target.value);
-
-    // Emit typing event
-    if (socket && activeChat) {
-      socket.emit("typing", { senderId: userId, receiverId: activeChat });
-
-      if (typingTimeout.current) {
-        clearTimeout(typingTimeout.current);
-      }
-
-      typingTimeout.current = setTimeout(() => {
-        socket.emit("stopTyping", { senderId: userId, receiverId: activeChat });
-      }, 1000);
-    }
-  };
 
   const fetchFollowers = async () => {
     const token = localStorage.getItem("token");
@@ -150,8 +110,6 @@ const Chatroom = () => {
       };
 
       socket.emit("sendMessage", newMessage);
-
-      socket.emit("stopTyping", { senderId: userId, receiverId: activeChat });
 
       setMessages((prevMessages) => [
         ...prevMessages,
@@ -306,17 +264,10 @@ const Chatroom = () => {
                     }`}
                   >
                     <p>{msg.text}</p>
-                    <span>{new Date(msg.createdAt).toLocaleTimeString()}</span> 
+                    <span>{new Date(msg.createdAt).toLocaleTimeString()}</span>
                   </div>
                 ))}
               </div>
-               {/* Typing Indicator */}
-               {isTyping && typingUser === activeChat && (
-                <div className="typing-indicator">
-                  {mutualFollowers.find((f) => f._id === typingUser)?.username}{" "}
-                  is typing...
-                </div>
-              )}
 
               <div className="chatroom-input">
                 <button
