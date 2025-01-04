@@ -114,7 +114,7 @@
 .sent-message {
   padding: 5px;
   font-size: 13px;
-  background: linear-gradient(45deg, #000000, #4700d6);
+  background: linear-gradient(45deg, #171717, #4700d6);
   align-self: flex-end;
   text-wrap: balance; 
   max-width: 400px; 
@@ -129,7 +129,7 @@
 .received-message {
   padding: 5px;
   font-size: 13px;
-  background: linear-gradient(45deg, #974616, #000000);
+  background: linear-gradient(45deg, #974616, #171717);
   align-self: flex-start;
   margin-right: 10%;
   margin-left: 3%;
