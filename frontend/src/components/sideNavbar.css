@@ -182,8 +182,9 @@
   }
   .profile-image {
     margin-top: 50px;
-    width: 100px; /* Width of the image */
-    height: 100px;
+    width: 125px; /* Width of the image */
+    height: 125px;
+    margin-left: 0;
   }
   .logged-in-menu li button {
     justify-content: center;
