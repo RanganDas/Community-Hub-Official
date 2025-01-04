@@ -185,7 +185,7 @@
   }
   .logged-in-menu li button {
     justify-content: center;
-    width: 80%;
+    width: 60%;
     padding: 10px;
     
     
@@ -212,4 +212,5 @@
     font-size: 14px;
     
   }
+ 
 }
