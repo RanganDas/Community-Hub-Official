@@ -829,25 +829,6 @@ io.on("connection", (socket) => {
     }
   });
 
-    // Handle typing event (new functionality)
-    socket.on("typing", (userId) => {
-      // Emit the typing event to the recipient of the message
-      // Notify the receiver that the sender is typing
-      const receiverSocketId = onlineUsers.get(userId);  // Assuming `userId` is the sender here
-      if (receiverSocketId) {
-        io.to(receiverSocketId).emit("typing", userId);  // Notify other client that the user is typing
-      }
-    });
-  
-    // Handle stop typing event (new functionality)
-    socket.on("stopTyping", (userId) => {
-      // Emit the stopTyping event to the recipient of the message
-      const receiverSocketId = onlineUsers.get(userId);  // Assuming `userId` is the sender here
-      if (receiverSocketId) {
-        io.to(receiverSocketId).emit("stopTyping", userId);  // Notify other client that the user stopped typing
-      }
-    });
-
   // Handle disconnection
   socket.on("disconnect", () => {
     for (const [userId, socketId] of onlineUsers.entries()) {

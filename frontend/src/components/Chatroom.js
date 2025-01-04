@@ -32,11 +32,6 @@ const Chatroom = () => {
   const [loading, setLoading] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [socket, setSocket] = useState(null);
-
-  const [isTyping, setIsTyping] = useState(false); // New state for typing indicator
-  const [typingUser, setTypingUser] = useState(null); // To track which user is typing
-
-
   const URL = "https://community-hub-official.onrender.com";
 
   const fetchUserId = async () => {
@@ -121,8 +116,6 @@ const Chatroom = () => {
         { ...newMessage, createdAt: new Date() },
       ]);
       setMessage("");
-      setIsTyping(false); // Stop typing indicator after message is sent
-      socket.emit("stopTyping", { senderId: userId, receiverId: activeChat });
     }
   };
 
@@ -194,30 +187,6 @@ const Chatroom = () => {
       fetchMessages(activeChat);
     }
   }, [userId, activeChat]);
-
-
-  useEffect(() => {
-    if (socket) {
-      socket.on("receiveMessage", (newMessage) => {
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
-      });
-  
-      socket.on("typing", (userId) => {
-        if (userId !== activeChat) return; // Only show typing indicator if it's for the active chat
-        setTypingUser(userId); // Set the typing user for the active chat
-      });
-  
-      socket.on("stopTyping", (userId) => {
-        if (userId === activeChat) {
-          setTypingUser(null); // Stop showing the typing indicator when the user stops typing
-        }
-      });
-    }
-  }, [socket, activeChat, userId]);  // Make sure to include the relevant dependencies
-  
-
-
-  
 
   return (
     <div className="chatroom-container-wrapper">
@@ -298,11 +267,6 @@ const Chatroom = () => {
                     <span>{new Date(msg.createdAt).toLocaleTimeString()}</span>
                   </div>
                 ))}
-                {typingUser && typingUser !== userId && (
-                  <div className="typing-indicator">
-                    <span>Typing...</span>
-                  </div>
-                )}
               </div>
 
               <div className="chatroom-input">
