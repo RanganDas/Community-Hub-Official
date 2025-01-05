@@ -11,6 +11,7 @@
   align-items: center;
   opacity: 0;
   animation: fadeIn 0.2s forwards;
+  z-index: 9999;
 }
 
 /* Modal box */
@@ -195,8 +196,7 @@
 
 @media (max-width: 400px) {
   .user-details-modal {
-    height: 85%;
-    margin-top: 60px;
+    height: 90%;
   }
   .user-details-modal-close {
     position: absolute;
@@ -228,14 +228,14 @@
   .modal-details-action.follow {
     background-color: #007bff;
     width: 200px; /* Width of the button */
-    margin: px auto 25px; /* Center horizontally with margin auto */
+    margin: 10px auto 10px; /* Center horizontally with margin auto */
     color: white;
     display: block; /* Make it a block element to enable centering */
   }
   .modal-details-action.unfollow {
     background-color: #f06e65;
     width: 200px; /* Width of the button */
-    margin: 30px auto 25px; /* Center horizontally with margin auto */
+    margin: 10px auto 10px; /* Center horizontally with margin auto */
     color: white;
     display: block;
     margin-bottom: 50px;
