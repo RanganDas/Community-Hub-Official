@@ -11,13 +11,13 @@ const About = () => {
 
       {/* Heading Section */}
       <h1 className="about-heading">
-        Community Hub – More Than Social, It's Personal
+        Sparklify – More Than Social, It's Personal
       </h1>
 
       {/* Description Section */}
       <div className="about-description">
         <p>
-          Welcome to <strong>Community Hub</strong>, the ultimate platform
+          Welcome to <strong>Sparklify</strong>, the ultimate platform
           designed to keep you connected, informed, and engaged with the world
           around you. Whether you're looking to share your thoughts, connect
           with friends, or explore stories from a diverse community, Community

@@ -35,6 +35,7 @@ const MobileChat = () => {
   const handleMouseLeave2 = () => setIsHovered2(false);
   const [onlineUsers, setOnlineUsers] = useState([]);
 
+  //const [userName, setUsername] = useState("");
   const URL = "https://community-hub-official.onrender.com";
 
   useEffect(() => {
@@ -133,6 +134,25 @@ const MobileChat = () => {
     setMessage((prevMessage) => prevMessage + emojiObject.emoji);
     setIsEmojiPickerOpen(false);
   };
+
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  const isSameDay = (date1, date2) => {
+    const d1 = new Date(date1);
+    const d2 = new Date(date2);
+    return (
+      d1.getFullYear() === d2.getFullYear() &&
+      d1.getMonth() === d2.getMonth() &&
+      d1.getDate() === d2.getDate()
+    );
+  };
+
   return (
     <div className="chatroom-wrapper">
       <div className="chatroom">
@@ -143,9 +163,11 @@ const MobileChat = () => {
               <h3
                 style={{
                   color: "white",
+                  letterSpacing: "2px",
+                  marginLeft: "10px",
                 }}
               >
-                Community Hub
+                Sparklify
               </h3>
               <div className="sidebar-header-buttons">
                 <button
@@ -234,9 +256,7 @@ const MobileChat = () => {
                         : "red",
                     }}
                   >
-                    {onlineUsers.includes(mutualFollower._id)
-                      ? "🟢"
-                      : "🔴"}
+                    {onlineUsers.includes(mutualFollower._id) ? "🟢" : "🔴"}
                   </span>
                 </li>
               ))}
@@ -266,11 +286,14 @@ const MobileChat = () => {
                   background: "black",
                   padding: "5px 10px",
                   borderRadius: "20px",
-                  color: onlineUsers.includes(activeChat) ? "green" : "rgb(130, 0, 0)",
+                  color: onlineUsers.includes(activeChat)
+                    ? "green"
+                    : "rgb(130, 0, 0)",
                 }}
               >
                 {onlineUsers.includes(activeChat) ? "Online" : "Offline"}
               </span>
+
               <button
                 className="back-button"
                 onClick={() => setActiveChat(null)}
@@ -280,21 +303,33 @@ const MobileChat = () => {
             </div>
 
             <div className="messages">
-              {messages.map((msg, index) => (
-                <div
-                  key={index}
-                  className={`message ${
-                    msg.senderId === userId
-                      ? "sent-message"
-                      : "received-message"
-                  }`}
-                >
-                  <p>{msg.text}</p>
-                  <span style={{ margin: "5px" }}>
-                    {new Date(msg.createdAt).toLocaleTimeString()}
-                  </span>
-                </div>
-              ))}
+              {messages.map((msg, index) => {
+                const isNewDay =
+                  index === 0 ||
+                  !isSameDay(msg.createdAt, messages[index - 1].createdAt);
+
+                return (
+                  <React.Fragment key={index}>
+                    {isNewDay && (
+                      <div className="date-header">
+                        {formatDate(msg.createdAt)}
+                      </div>
+                    )}
+                    <div
+                      className={`message ${
+                        msg.senderId === userId
+                          ? "sent-message"
+                          : "received-message"
+                      }`}
+                    >
+                      <p>{msg.text}</p>
+                      <span style={{ margin: "5px" }}>
+                        {new Date(msg.createdAt).toLocaleTimeString()}
+                      </span>
+                    </div>
+                  </React.Fragment>
+                );
+              })}
             </div>
 
             {/* Message Input Section */}
@@ -327,7 +362,9 @@ const MobileChat = () => {
                 type="text"
                 placeholder="Type a message..."
                 value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
                 className="message-input-field"
               />
               <button className="send-button" onClick={handleSendMessage}>

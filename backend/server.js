@@ -40,7 +40,6 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-
 // Generate a 6-digit verification code
 const generateVerificationCode = () => {
   return Math.floor(100000 + Math.random() * 900000);
@@ -201,6 +200,36 @@ app.post("/api/verify-login", async (req, res) => {
     res.status(500).json({ message: "Error verifying login", error });
   }
 });
+
+
+app.post("/api/forgotpassword", async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+   
+
+    // Generate verification code and save it temporarily
+    const verificationCode = generateVerificationCode();
+    user.verificationCode = verificationCode;
+    await user.save();
+
+    // Send code to user's email
+    await sendVerificationEmail(email, verificationCode);
+    res.status(200).json({ message: "Verification code sent to email" });
+  } catch (error) {
+    res.status(500).json({ message: "Error logging in", error });
+  }
+});
+
+
+
+
+
+
 
 app.get("/api/user/profile", authMiddleware, async (req, res) => {
   try {
@@ -793,7 +822,7 @@ const server = http.createServer(app);
 // Initialize Socket.IO server
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", // Replace with your frontend URL
+    origin: process.env.FRONTEND_URL, // Replace with your frontend URL
     methods: ["GET", "POST"],
   },
 });
@@ -826,6 +855,19 @@ io.on("connection", (socket) => {
     const receiverSocketId = onlineUsers.get(receiverId);
     if (receiverSocketId) {
       io.to(receiverSocketId).emit("receiveMessage", newMessage);
+    }
+  });
+
+  // Handle typing event
+  socket.on("typing", ({ senderId, receiverId }) => {
+    console.log(`Typing event from Sender: ${senderId} to Receiver: ${receiverId}`);
+
+    // Find the receiver's socket ID
+    const receiverSocketId = users[receiverId];
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("typing", { senderId });
+    } else {
+      console.log(`Receiver (${receiverId}) is not connected.`);
     }
   });
 
@@ -896,8 +938,6 @@ app.delete(
     }
   }
 );
-
-
 
 app.get("/api/count/notifications", authMiddleware, async (req, res) => {
   try {
@@ -1135,25 +1175,22 @@ app.get("/api/users/liked/:userId", authMiddleware, async (req, res) => {
   }
 });
 
-
-app.get('/api/news', async (req, res) => {
+app.get("/api/news", async (req, res) => {
   try {
-    const response = await axios.get('https://newsapi.org/v2/top-headlines', {
+    const response = await axios.get("https://newsapi.org/v2/top-headlines", {
       params: {
-        country: 'us',
+        country: "us",
         pageSize: 40,
-        apiKey: 'b508735890aa443dbc65da25a39253a1',
+        apiKey: "b508735890aa443dbc65da25a39253a1",
       },
     });
     console.log("NewsAPI Response:", response.data); // Log the API response
     res.json(response.data);
   } catch (error) {
-    console.error("Error fetching news:", error.response?.data || error.message);
-    res.status(500).json({ error: 'Failed to fetch news' });
+    console.error(
+      "Error fetching news:",
+      error.response?.data || error.message
+    );
+    res.status(500).json({ error: "Failed to fetch news" });
   }
 });
-
-
-
-
-

@@ -118,16 +118,32 @@ const Login = () => {
         <button
           style={{
             background: "none",
+            
+            border: "none",
+            color: "gray",
+            fontSize: "13px",
+            textAlign: "center",
+            marginTop: "10px",
+          }}
+          onClick={() => navigate("/recover-password")}
+        >
+          Forget password ?
+        </button>
+        <button
+          style={{
+            background: "none",
             textDecoration: "underline",
             border: "none",
             color: "gray",
-            fontSize: "15px",
+            fontSize: "13px",
             textAlign: "center",
+            marginTop: "10px",
           }}
           onClick={() => navigate("/")}
         >
           Stay logged out
         </button>
+        
       </form>
 
       <ToastContainer

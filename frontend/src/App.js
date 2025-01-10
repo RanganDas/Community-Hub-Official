@@ -18,7 +18,8 @@ import StoryFeed from './components/StoryFeed';
 import About from './components/About';
 import Favourites from './components/Favourites';
 import ResponsiveChat from './components/ResponsiveChat';
-
+import RecoverPassword from './components/RecoverPassword';
+import VerifyPassword from './components/VerifyPassword';
 function App() {
 
   useTokenExpirationCheck();
@@ -44,6 +45,8 @@ function App() {
           <Route path="/storyfeed" element={<StoryFeed />} />
           <Route path="/aboutus" element={<About />} />
           <Route path="/favourites" element={<Favourites />} />
+          <Route path="/recover-password" element={<RecoverPassword />} />
+          <Route path="/verify-password" element={<VerifyPassword />} />
         </Routes>
       </div>
     </Router>

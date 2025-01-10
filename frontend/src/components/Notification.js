@@ -69,7 +69,7 @@ const Notification = () => {
   const deleteAllNotifications = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete("http://localhost:5000/notifications", {
+      await axios.delete("https://community-hub-official.onrender.com/notifications", {
         headers: { Authorization: `Bearer ${token}` },
       });
   
