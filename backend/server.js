@@ -828,18 +828,7 @@ io.on("connection", (socket) => {
     }
   });
 
-  // Handle typing event
-  socket.on("typing", ({ senderId, receiverId }) => {
-    console.log(`Typing event from Sender: ${senderId} to Receiver: ${receiverId}`);
 
-    // Find the receiver's socket ID
-    const receiverSocketId = users[receiverId];
-    if (receiverSocketId) {
-      io.to(receiverSocketId).emit("typing", { senderId });
-    } else {
-      console.log(`Receiver (${receiverId}) is not connected.`);
-    }
-  });
 
   // Handle disconnection
   socket.on("disconnect", () => {

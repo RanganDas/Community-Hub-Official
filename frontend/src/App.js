@@ -44,7 +44,6 @@ function App() {
           <Route path="/storyfeed" element={<StoryFeed />} />
           <Route path="/aboutus" element={<About />} />
           <Route path="/favourites" element={<Favourites />} />
-          
         </Routes>
       </div>
     </Router>
