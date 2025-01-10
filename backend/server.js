@@ -225,6 +225,32 @@ app.post("/api/forgotpassword", async (req, res) => {
   }
 });
 
+app.post("/api/verify-otp", async (req, res) => {
+  const { email, verificationCode } = req.body;
+  console.log("Received email:", email, "Verification Code:", verificationCode); // Log input
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    if (user.verificationCode !== parseInt(verificationCode)) {
+      return res.status(400).json({ message: "Invalid verification code" });
+    }
+
+    // Clear verification code after successful login
+    user.verificationCode = null;
+    await user.save();
+
+    res.status(200).json({ message: "Login verified successfully", token });
+  } catch (error) {
+    res.status(500).json({ message: "Error verifying login", error });
+  }
+});
+
+
 
 
 
