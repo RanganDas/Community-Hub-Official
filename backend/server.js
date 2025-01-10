@@ -15,7 +15,14 @@ const moment = require("moment");
 const axios = require("axios");
 
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:3000", // Allow requests from your frontend origin
+  methods: ["GET", "POST"], // Allowed methods
+  credentials: true, // Allow cookies and credentials
+};
+
+// Apply CORS middleware to the express app
+app.use(cors(corsOptions));
 
 require("dotenv").config();
 
@@ -828,7 +835,19 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("userTyping", ({ receiverId, senderName }) => {
+    const receiverSocketId = onlineUsers.get(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("userTyping", { senderId: socket.id, senderName });
+    }
+  });
 
+  socket.on("stopTyping", ({ receiverId }) => {
+    const receiverSocketId = onlineUsers.get(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("stopTyping");
+    }
+  });
 
   // Handle disconnection
   socket.on("disconnect", () => {
