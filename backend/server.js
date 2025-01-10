@@ -201,62 +201,6 @@ app.post("/api/verify-login", async (req, res) => {
   }
 });
 
-
-app.post("/api/forgotpassword", async (req, res) => {
-  const { email } = req.body;
-
-  try {
-    const user = await User.findOne({ email });
-
-    if (!user) return res.status(404).json({ message: "User not found" });
-
-   
-
-    // Generate verification code and save it temporarily
-    const verificationCode = generateVerificationCode();
-    user.verificationCode = verificationCode;
-    await user.save();
-
-    // Send code to user's email
-    await sendVerificationEmail(email, verificationCode);
-    res.status(200).json({ message: "Verification code sent to email" });
-  } catch (error) {
-    res.status(500).json({ message: "Error logging in", error });
-  }
-});
-
-app.post("/api/verify-otp", async (req, res) => {
-  const { email, verificationCode } = req.body;
-  console.log("Received email:", email, "Verification Code:", verificationCode); // Log input
-
-  try {
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
-    }
-
-    if (user.verificationCode !== parseInt(verificationCode)) {
-      return res.status(400).json({ message: "Invalid verification code" });
-    }
-
-    // Clear verification code after successful login
-    user.verificationCode = null;
-    await user.save();
-
-    res.status(200).json({ message: "Login verified successfully", token });
-  } catch (error) {
-    res.status(500).json({ message: "Error verifying login", error });
-  }
-});
-
-
-
-
-
-
-
-
 app.get("/api/user/profile", authMiddleware, async (req, res) => {
   try {
     // Find the user using the user ID decoded from the token
