@@ -1,7 +1,7 @@
 import React from "react";
 import "./About.css"; // Import the CSS file for styling
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 const About = () => {
   return (
@@ -52,14 +52,14 @@ const About = () => {
         <p>Follow us on:</p>
         <div className="social-icons">
           <a
-            href="https://www.instagram.com"
+            href="https://github.com/RanganDas"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FontAwesomeIcon icon={faInstagram} color="pink" size="2x" />
+            <FontAwesomeIcon icon={faGithub} color="pink" size="2x" />
           </a>
           <a
-            href="https://www.linkedin.com"
+            href="https://www.linkedin.com/in/rangan-das-687575247/"
             target="_blank"
             rel="noopener noreferrer"
           >
