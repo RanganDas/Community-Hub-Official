@@ -15,10 +15,15 @@ const UpdateProfile = () => {
     age: "",
     imageUrl: "",
   });
-  const [loading, setLoading] = useState(false); // Set to false initially
+  const [locationSuggestions, setLocationSuggestions] = useState([]); // Location suggestions
+  const [selectedLocation, setSelectedLocation] = useState(null); // Selected location
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const navigate = useNavigate();
+
+  const URL = "https://sparklify-official.onrender.com";
+  const OPENCAGE_API_KEY = "f04de10f2b304f1d956f4b0bd8c96ecb"; // Replace with your API key
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -29,24 +34,81 @@ const UpdateProfile = () => {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-      }, 100); // Optional: Simulate loading for a moment
+      }, 100);
     }
   }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
+
+    if (name === "location") {
+      fetchLocationSuggestions(value); // Fetch location suggestions
+    }
   };
+
+  const fetchLocationSuggestions = async (query) => {
+    if (!query || query.trim().length < 3) {
+      setLocationSuggestions([]);
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `https://api.opencagedata.com/geocode/v1/json`,
+        {
+          params: {
+            key: OPENCAGE_API_KEY,
+            q: query.trim(),
+            limit: 3,
+          },
+        }
+      );
+
+      const suggestions = response.data.results.map((result) => ({
+        formatted: result.formatted,
+        geometry: result.geometry,
+      }));
+
+      setLocationSuggestions(suggestions);
+    } catch (error) {
+      console.error("Error fetching location suggestions:", error);
+    }
+  };
+
+  const handleLocationChange = (e) => {
+    const value = e.target.value;
+    setUserData({ ...userData, city: value });
+  
+    if (value.length > 2) {
+      fetchLocationSuggestions(value);
+    } else {
+      setLocationSuggestions([]); // Clear suggestions if input is too short
+    }
+  };
+
+  const handleLocationSelect = (location) => {
+    setUserData({ ...userData, city: location.formatted });
+    setSelectedLocation(location);
+    setLocationSuggestions([]);
+  };
+
   const handleJobSelection = (job) => {
     setUserData({ ...userData, job });
-    setDropdownVisible(false); // Close the dropdown after selection
+    setDropdownVisible(false);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
 
+    if (!selectedLocation) {
+      toast.error("Please select a valid location from the suggestions.");
+      return;
+    }
+
     axios
-      .put("https://community-hub-official.onrender.com/api/user/profile/update", userData, {
+      .put(`${URL}/api/user/profile/update`, userData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -55,7 +117,7 @@ const UpdateProfile = () => {
         toast.success("Profile Information Updated Successfully");
         setTimeout(() => {
           navigate("/profile");
-        }, 4000); // Redirect after success
+        }, 4000);
       })
       .catch((error) => {
         console.error("Error updating profile", error);
@@ -85,7 +147,7 @@ const UpdateProfile = () => {
               name="imageUrl"
               value={userData.imageUrl}
               onChange={handleChange}
-              placeholder="Enter a valid picture url"
+              placeholder="Enter a valid picture URL"
             />
           </div>
           <div className="form-group">
@@ -105,23 +167,37 @@ const UpdateProfile = () => {
               value={userData.phoneNumber}
               onChange={handleChange}
               placeholder="Enter phone number"
-              maxLength="10" // Enforce 10 digits maximum
-              pattern="\d*" // Only digits allowed
+              maxLength="10"
+              pattern="\d*"
               onInput={(e) => {
-                e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Replace non-numeric characters
+                e.target.value = e.target.value.replace(/[^0-9]/g, "");
               }}
             />
           </div>
+
           <div className="form-group">
             <input
               type="text"
-              name="city"
+              name="city" // Keep the name as "city" to match your backend field
+              placeholder="Enter location"
               value={userData.city}
-              onChange={handleChange}
-              placeholder="Enter city"
-              maxLength="85"
+              onChange={handleLocationChange} // Custom handler for fetching location suggestions
             />
+            {locationSuggestions.length > 0 && (
+              <ul className="location-suggestions">
+                {locationSuggestions.map((location, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleLocationSelect(location)}
+                    className="location-suggestion-item"
+                  >
+                    {location.formatted}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
+
           <div className="form-group">
             <input
               type="date"
@@ -131,39 +207,27 @@ const UpdateProfile = () => {
             />
           </div>
           <div className="form-group">
-            
             <div className="job-input-container">
               <input
                 type="text"
                 name="job"
-                value={userData.job} // Show a default text if no job is selected
-                readOnly // Make the input read-only, so the user can't type in it
-                onClick={() => setDropdownVisible(!dropdownVisible)} // Toggle dropdown on click
+                value={userData.job}
+                readOnly
+                onClick={() => setDropdownVisible(!dropdownVisible)}
                 placeholder="Click here to select a job"
               />
-             
-            
             </div>
             {dropdownVisible && (
               <div className="job-dropdown">
                 <ul>
-                  <li onClick={() => handleJobSelection("Software Developer")}>Software Developer</li>
-                  <li onClick={() => handleJobSelection("Product Manager")}>Product Manager</li>
-                  <li onClick={() => handleJobSelection("Designer")}>Designer</li>
-                  <li onClick={() => handleJobSelection("Data Analyst")}>Data Analyst</li>
+                  <li onClick={() => handleJobSelection("Software Developer")}>
+                    Software Developer
+                  </li>
                   <li onClick={() => handleJobSelection("Teacher")}>Teacher</li>
+                  <li onClick={() => handleJobSelection("Engineer")}>
+                    Engineer
+                  </li>
                   <li onClick={() => handleJobSelection("Doctor")}>Doctor</li>
-                  <li onClick={() => handleJobSelection("Engineer")}> Engineer</li>
-                  <li onClick={() => handleJobSelection("Nurse")}>Nurse</li>
-                  <li onClick={() => handleJobSelection("Architect")}>Architect</li>
-                  <li onClick={() => handleJobSelection("Lawyer")}>Lawyer</li>
-                  <li onClick={() => handleJobSelection("Accountant")}>Accountant</li>
-                  <li onClick={() => handleJobSelection("Chef")}>Chef</li>
-                  <li onClick={() => handleJobSelection("Scientist")}>Scientist</li>
-                  <li onClick={() => handleJobSelection("Influencer")}>Influencer</li>
-                  <li onClick={() => handleJobSelection("Artist")}>Artist</li>
-                  <li onClick={() => handleJobSelection("Buisnessman")}>Buisnessman</li>
-                  <li onClick={() => handleJobSelection("Other")}>Other</li>
                 </ul>
               </div>
             )}
@@ -175,11 +239,11 @@ const UpdateProfile = () => {
               value={userData.age}
               onChange={handleChange}
               placeholder="Enter age"
-              min="5" // Ensure the minimum age is 0
-              max="90" // Set the maximum age to 100
+              min="5"
+              max="90"
               onInput={(e) => {
                 if (e.target.value > 90) {
-                  e.target.value = 90; // Prevents the user from entering a value greater than 100
+                  e.target.value = 90;
                 }
               }}
             />

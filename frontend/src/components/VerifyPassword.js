@@ -1,26 +1,25 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./style.css"; // Import CSS file for styling
-import { useNavigate } from 'react-router-dom';
+import "./style.css"; // Import the same CSS as VerifyCode
+import { useEffect } from "react";
 
-const VerifyCode = () => {
-  const [code, setCode] = useState(Array(6).fill(''));
+const VerifyPassword = () => {
+  const [code, setCode] = useState(Array(6).fill(""));
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const email = sessionStorage.getItem("email");
 
-  const URL = 'https://sparklify-official.onrender.com';
+  const URL = "https://sparklify-official.onrender.com";
+  
   useEffect(() => {
-    const isPendingVerification = sessionStorage.getItem("isPendingVerification");
-
-    // Redirect to login if no pending verification
-    if (!isPendingVerification) {
-      navigate('/register');
+    // Check if the session has a pending verification
+    if (!email) {
+      navigate("/forgetpassword");
     }
-  }, [navigate]);
+  }, [email, navigate]);
 
   const handleInputChange = (e, index) => {
     const { value } = e.target;
@@ -38,47 +37,43 @@ const VerifyCode = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const verificationCode = code.join('');
+    const verificationCode = code.join("");
+  
     if (verificationCode.length !== 6) {
-      toast.error('Please enter a valid 6-digit code.');
+      toast.error("Please enter a valid 6-digit code.");
       return;
     }
-
+  
+    console.log("Sending data to backend:", { email, verificationCode }); // Log the email and OTP
     setLoading(true);
+  
     try {
-      const response = await axios.post(`${URL}/api/verify`, { 
+      const response = await axios.post(`${URL}/api/verify-password`, {
         email,
-        verificationCode
+        verificationCode,
       });
-      if (response.status === 400) {
-          toast.error("Wrong code entered"); 
-        }
+  
       if (response.status === 200) {
-        const { token } = response.data;
-          if (token) {
-            localStorage.setItem("token", token); // Store token in localStorage
-            console.log("Token saved:", token); // Debugging line to check token
-            // Redirect to home page or another route
-          } else {
-            console.log("Token not found in response");
-          }
-        toast.success('Verification successful!');
+        toast.success("Email verified!");
         
         setTimeout(() => {
-            navigate('/');
-        }, 4000);
-        
+          navigate("/change-password");
+        }, 3000);
       }
     } catch (error) {
+      console.error("Error verifying OTP:", error.response?.data || error.message); // Log backend response
+      toast.error(error.response?.data.message || "Verification failed. Please try again.");
       setLoading(false);
-      toast.error('Invalid or expired code. Please try again.');
     }
   };
+  
+  
 
   return (
+    
     <div className="verify-container">
       <form onSubmit={handleSubmit} className="verify-form">
-        <h2>Enter the 6-Digit Code</h2>
+        <h2>Enter Verification Code</h2>
         <div className="code-inputs">
           {code.map((digit, index) => (
             <input
@@ -93,7 +88,7 @@ const VerifyCode = () => {
           ))}
         </div>
         <button type="submit" disabled={loading} className="verify-button">
-          {loading ? 'Verifying...' : 'Verify Code'}
+          {loading ? "Verifying..." : "Verify Code"}
         </button>
       </form>
       <ToastContainer
@@ -109,7 +104,8 @@ const VerifyCode = () => {
         theme="dark"
       />
     </div>
+   
   );
 };
 
-export default VerifyCode;
+export default VerifyPassword;

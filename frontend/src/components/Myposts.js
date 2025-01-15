@@ -10,14 +10,15 @@ const Myposts = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
+  const URL = "https://sparklify-official.onrender.com";
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/login"); // Redirect to login if user is not authenticated
     } else {
       axios
-        .get("https://community-hub-official.onrender.com/api/user/posts", {
+        .get(`${URL}/api/user/posts`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {

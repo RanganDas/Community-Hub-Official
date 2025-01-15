@@ -176,6 +176,34 @@
   background-color: #fd000065;
 }
 
+.location-suggestions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 2px solid #303030;
+  border-radius: 10px;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  background: rgb(31, 31, 31);
+  z-index: 1000;
+  width: 435px;
+  overflow: hidden;
+  text-align: center;
+  font-size: 13px;
+  color: gray;
+}
+
+.location-suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.location-suggestion-item:hover {
+  background-color: #060606;
+}
+
+
 /* Responsive Styling */
 @media (max-width: 600px) {
   .unique-modal-content {
@@ -217,5 +245,22 @@
   .unique-submit-button{
     margin-top: 10px !important;
     border-radius: 10px !important;
+  }
+  .location-suggestions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 2px solid #303030;
+    border-radius: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    background: rgb(31, 31, 31);
+    z-index: 1000;
+    width: 300px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 13px;
+    color: gray;
   }
 }

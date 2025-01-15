@@ -10,11 +10,13 @@ const News = () => {
   const [error, setError] = useState(null);
   const sizeClasses = ["small"]; 
   const navigate = useNavigate();// Add more classes as needed
+
+  const URL = "https://sparklify-official.onrender.com";
   const fetchNews = async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.get('https://community-hub-official.onrender.com/api/news');
+      const response = await axios.get(`${URL}/api/news`);
       setArticles(response.data.articles);
     } catch (err) {
       console.error("Frontend Error:", err); // Log frontend error

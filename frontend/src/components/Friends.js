@@ -18,7 +18,7 @@ const Friends = () => {
   const [selectedUserId, setSelectedUserId] = useState(null);
 
   const [randomUser, setRandomUser] = useState(null); // New state for random user
-
+  const URL = "https://sparklify-official.onrender.com";
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -33,7 +33,7 @@ const Friends = () => {
         const token = localStorage.getItem("token");
 
         const response = await axios.get(
-          "https://community-hub-official.onrender.com/api/people/users",
+          `${URL}/api/people/users`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

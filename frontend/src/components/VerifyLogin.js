@@ -12,6 +12,8 @@ const VerifyLogin = () => {
   const navigate = useNavigate();
   const email = sessionStorage.getItem("email");
 
+  const URL = "https://sparklify-official.onrender.com";
+  
   useEffect(() => {
     // Check if the session has a pending verification
     if (!email) {
@@ -48,7 +50,7 @@ const VerifyLogin = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://community-hub-official.onrender.com/api/verify-login",
+        `${URL}/api/verify-login`,
         {
           email,
           verificationCode,

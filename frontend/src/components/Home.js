@@ -11,15 +11,15 @@ const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1); // Track total pages
-
+  const URL = "https://sparklify-official.onrender.com";
   // Fetch posts from the backend with pagination
  useEffect(() => {
   const fetchPosts = async () => {
     try {
       const response = await axios.get(
         currentPage === 0
-          ? `https://community-hub-official.onrender.com/api/posts/getposts` // Fetch all posts
-          : `https://community-hub-official.onrender.com/api/posts/getposts?page=${currentPage}` // Fetch paginated posts
+          ? `${URL}/api/posts/getposts` // Fetch all posts
+          : `${URL}/api/posts/getposts?page=${currentPage}` // Fetch paginated posts
       );
       setPosts(response.data.posts);
       setTotalPages(response.data.totalPages || 1); // Handle totalPages for both cases

@@ -4,13 +4,16 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./sideNavbar.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsis, faCog } from "@fortawesome/free-solid-svg-icons";
+
 const SideNavbar = () => {
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("token");
   const [username, setUsername] = useState("");
   const [imageUrl, setImageUrl] = useState(""); // State for imageUrl
   const [loading, setLoading] = useState(true); // Loading state for API call
-
+  const URL = "https://sparklify-official.onrender.com";
   useEffect(() => {
     if (isLoggedIn) {
       fetchUserImage(); // Fetch user image if logged in
@@ -20,7 +23,7 @@ const SideNavbar = () => {
   const fetchUserImage = async () => {
     try {
       const token = localStorage.getItem("token"); // Get the token from localStorage
-      const response = await axios.get("https://community-hub-official.onrender.com/api/user/image", {
+      const response = await axios.get(`${URL}/api/user/image`, {
         headers: {
           Authorization: `Bearer ${token}`, // Pass the token in the headers
         },
@@ -47,10 +50,15 @@ const SideNavbar = () => {
   const handleLogin = () => {
     navigate("/login"); // Redirect to the signup page
   };
+  const handleSettings = () => {
+    navigate("/settings"); // Redirect to the settings page
+  };
 
   return (
     <div className="right-sidebar">
-      <div className="sidebar-title">Menu</div>
+      <div className="sidebar-title">
+        <FontAwesomeIcon size="xl" icon={faEllipsis} color="#af94ff" />
+      </div>
       <ul className="nav">
         {!isLoggedIn ? (
           <ul style={{ listStyleType: "none" }}>
@@ -73,6 +81,14 @@ const SideNavbar = () => {
           </ul>
         ) : (
           <ul className="logged-in-menu">
+            {/* Icon button in top-right corner */}
+            <button
+              className="settings-button"
+              onClick={handleSettings}
+              title="Settings"
+            >
+              <FontAwesomeIcon icon={faCog} size="lg" />
+            </button>
             <li className="profile-image-container">
               {!loading ? (
                 <img

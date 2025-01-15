@@ -1,12 +1,13 @@
 
 .navbar3 {
   width: 100vh;
-  background-color: #333; /* Dark background color */
+  background-color: #212030; /* Dark background color */
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: white;
+  border-bottom: #464646ae 1px solid;
 }
 
 .navbar-container3 {

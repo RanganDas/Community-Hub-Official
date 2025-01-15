@@ -32,12 +32,13 @@ const Navbar = () => {
   // Handle mouse enter and leave for specific icons
   const handleMouseEnter = (icon) => setHoveredIcon(icon);
   const handleMouseLeave = () => setHoveredIcon(null);
-
+  const URL = "https://sparklify-official.onrender.com";
+  
   const fetchNotificationCount = async () => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.get(
-        "https://community-hub-official.onrender.com/api/count/notifications",
+        `${URL}/api/count/notifications`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

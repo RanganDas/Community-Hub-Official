@@ -22,7 +22,7 @@ const Register = () => {
     if (password === confirmPassword) {
       try {
         const response = await axios.post(
-          "https://community-hub-official.onrender.com/api/register",
+          `${URL}/api/register`,
           {
             username,
             email,
@@ -139,7 +139,7 @@ const Register = () => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
           title="Must contain at least one lowercase letter, one uppercase letter, one number, one special character, and be at least 8 characters long"
           required
         />

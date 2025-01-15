@@ -10,11 +10,11 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const MypostCard = ({ post, onDelete, onEdit }) => {
   //const navigate = useNavigate();
-
+  const URL = "https://sparklify-official.onrender.com";
   const handleDelete = async () => {
     const token = localStorage.getItem("token");
     try {
-      await axios.delete(`https://community-hub-official.onrender.com/api/posts/${post._id}`, {
+      await axios.delete(`${URL}/api/posts/${post._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

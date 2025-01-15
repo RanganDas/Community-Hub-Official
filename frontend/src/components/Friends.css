@@ -95,7 +95,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    background-color: #252525;
+    background-color: #1c1b28;
     color: white;
     position: fixed; /* Make the navbar fixed at the top */
     top: 0; /* Align it to the top of the page */
@@ -103,6 +103,7 @@
     width: 100%; /* Full width */
     height: 60px; /* Set a fixed height for the navbar */
     z-index: 1000; /* Ensure the navbar is above other content */
+    border-bottom: #464646ae 1px solid;
   }
   
   /* Title styling */
@@ -113,13 +114,14 @@
   
   /* Back button styling */
   .back-btn {
-    background-color: #3a3a3a;
+    background-color: #282828;
     color: #ffffff;
     border: none;
     padding: 5px 15px;
     cursor: pointer;
     font-size: 18px;
     border-radius: 4px;
+    border: #4e4e4e97 1px solid;
   }
   
   .back-btn:hover {

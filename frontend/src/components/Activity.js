@@ -10,12 +10,15 @@ const Activity = () => {
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
 
+  const URL = "https://sparklify-official.onrender.com";
+
+
   // Fetch the user ID
   useEffect(() => {
     const fetchUserId = async () => {
       try {
         const response = await axios.get(
-          "https://community-hub-official.onrender.com/api/auth/user",
+          `${URL}/api/auth/user`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -40,7 +43,7 @@ const Activity = () => {
       try {
         // Fetch liked post IDs
         const likedResponse = await axios.get(
-          `https://community-hub-official.onrender.com/api/users/liked/${userId}`,
+          `${URL}/api/users/liked/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -52,7 +55,7 @@ const Activity = () => {
 
         // Fetch full details of liked posts
         const postsResponse = await axios.post(
-          "https://community-hub-official.onrender.com/api/posts/details",
+          `${URL}/api/posts/details`,
           { postIds },
           {
             headers: {
@@ -78,7 +81,7 @@ const Activity = () => {
     try {
       // Call backend to toggle like state
       const response = await axios.put(
-        `https://community-hub-official.onrender.com/api/posts/${postId}/like`,
+        `${URL}/api/posts/${postId}/like`,
         {},
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

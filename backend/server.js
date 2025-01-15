@@ -15,14 +15,7 @@ const moment = require("moment");
 const axios = require("axios");
 
 app.use(express.json());
-const corsOptions = {
-  origin: "http://localhost:3000", // Allow requests from your frontend origin
-  methods: ["GET", "POST"], // Allowed methods
-  credentials: true, // Allow cookies and credentials
-};
-
-// Apply CORS middleware to the express app
-app.use(cors(corsOptions));
+app.use(cors());
 
 require("dotenv").config();
 
@@ -208,6 +201,96 @@ app.post("/api/verify-login", async (req, res) => {
   }
 });
 
+
+
+app.post("/api/forget-password", async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const verificationCode = generateVerificationCode(); // Ensure a 6-digit code is generated
+    user.verificationCode = verificationCode;
+    await user.save();
+
+    console.log("Generated OTP for user:", verificationCode); // Log OTP
+    await sendVerificationEmail(email, verificationCode); // Email OTP to the user
+    res.status(200).json({ message: "Verification code sent to email" });
+  } catch (error) {
+    console.error("Error generating OTP:", error); // Log error
+    res.status(500).json({ message: "Error logging in", error });
+  }
+});
+
+
+
+app.post("/api/verify-password", async (req, res) => {
+  const { email, verificationCode } = req.body;
+  console.log("Received email:", email, "Verification Code:", verificationCode); // Log received data
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    console.log("Stored OTP:", user.verificationCode, "Type:", typeof user.verificationCode);
+    console.log("Input OTP:", verificationCode, "Type:", typeof verificationCode);
+
+    if (String(user.verificationCode) !== String(verificationCode)) { // Ensure both are compared as strings
+      return res.status(400).json({ message: "Invalid verification code" });
+    }
+
+    // Clear verification code after successful verification
+    user.verificationCode = null;
+    await user.save();
+
+    res.status(200).json({ message: "Email verified successfully" });
+  } catch (error) {
+    console.error("Error verifying email:", error);
+    res.status(500).json({ message: "Error verifying email", error });
+  }
+});
+
+
+
+app.post("/api/create-new-password", async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    // Check if the new password matches the old password
+    const isSamePassword = await bcrypt.compare(newPassword, user.password);
+    if (isSamePassword) {
+      return res.status(400).json({ message: "New password cannot be the same as the old password." });
+    }
+
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update the user's password
+    user.password = hashedPassword;
+    await user.save();
+
+    res.status(200).json({ message: "Password updated successfully." });
+  } catch (error) {
+    console.error("Error updating password:", error);
+    res.status(500).json({ message: "Failed to update password.", error });
+  }
+});
+
+
+
+
 app.get("/api/user/profile", authMiddleware, async (req, res) => {
   try {
     // Find the user using the user ID decoded from the token
@@ -235,6 +318,52 @@ app.get("/api/user/profile", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Error fetching user profile", error });
   }
 });
+
+app.get("/api/user/settings-profile", authMiddleware, async (req, res) => {
+  try {
+    // Find the user using the user ID decoded from the token
+    const user = await User.findById(req.user.id).populate([
+      { path: "likedPosts", select: "title" }, // Include liked posts details
+      { path: "favorites", select: "title" }, // Include favorites details
+      { path: "following", select: "username" }, // Include following details
+      { path: "followers", select: "username" }, // Include followers details
+    ]);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Aggregate data for response
+    const totalLikes = user.likedPosts.length;
+    const totalFavorites = user.favorites.length;
+    const totalFollowing = user.following.length;
+    const totalFollowers = user.followers.length;
+
+    res.json({
+      username: user.username,
+      email: user.email,
+      bio: user.bio || "Add info",
+      phoneNumber: user.phoneNumber || "Add info",
+      city: user.city || "Add info",
+      dateOfBirth: user.dateOfBirth || "Add info",
+      job: user.job || "Add info",
+      age: user.age || "Add info",
+      imageUrl: user.imageUrl || "Add info",
+      totalLikes,
+      totalFavorites,
+      totalFollowing,
+      totalFollowers,
+      likedPosts: user.likedPosts, // Include post details
+      favorites: user.favorites, // Include post details
+      following: user.following, // Include usernames of following users
+      followers: user.followers, // Include usernames of followers
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error fetching settings profile", error });
+  }
+});
+
 
 // Update user profile route
 app.put("/api/user/profile/update", authMiddleware, async (req, res) => {
@@ -1172,3 +1301,147 @@ app.get("/api/news", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch news" });
   }
 });
+
+
+app.delete("/api/user/delete", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    // Optional: Remove related data like posts, comments, etc.
+    //await Post.deleteMany({ user: userId }); // Remove posts by this user
+    // Add more cascading deletions if needed (e.g., comments, likes, etc.)
+
+    // Delete the user from the database
+    const user = await User.findByIdAndDelete(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    res.status(200).json({ message: "Account deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting account:", error);
+    res.status(500).json({ message: "Server error. Please try again later." });
+  }
+});
+
+
+app.get("/api/user/stats/graph", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;  // Assuming req.user contains the authenticated user's data
+    console.log("Received user ID:", userId);
+    // Date range for the last 7 days
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(endDate.getDate() - 7);
+
+    // Aggregation pipeline
+    const userStats = await User.aggregate([
+      { $match: { _id: mongoose.Types.ObjectId(userId) } },
+      {
+        $project: {
+          likedPosts: 1,
+          favorites: 1,
+        },
+      },
+      {
+        $unwind: "$likedPosts", // Unwind likedPosts to work with each individual like
+      },
+      {
+        $match: {
+          "likedPosts.date": { $gte: startDate, $lte: endDate }, // Filter likes within the date range
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$likedPosts.date" } }, // Group by date
+          likesCount: { $sum: 1 },
+        },
+      },
+      {
+        $sort: { _id: 1 }, // Sort by date ascending
+      },
+      {
+        $project: {
+          date: "$_id",
+          likes: "$likesCount",
+          _id: 0,
+        },
+      },
+    ]);
+
+    // Aggregation for favorites
+    const favoriteStats = await User.aggregate([
+      { $match: { _id: mongoose.Types.ObjectId(userId) } },
+      {
+        $project: {
+          favorites: 1,
+        },
+      },
+      {
+        $unwind: "$favorites", // Unwind favorites to work with each individual favorite
+      },
+      {
+        $match: {
+          "favorites.date": { $gte: startDate, $lte: endDate }, // Filter favorites within the date range
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$favorites.date" } }, // Group by date
+          favoritesCount: { $sum: 1 },
+        },
+      },
+      {
+        $sort: { _id: 1 }, // Sort by date ascending
+      },
+      {
+        $project: {
+          date: "$_id",
+          favorites: "$favoritesCount",
+          _id: 0,
+        },
+      },
+    ]);
+
+    // Merge the results of likes and favorites
+    const graphData = mergeStats(userStats, favoriteStats);
+
+    res.json({ data: graphData });
+  } catch (error) {
+    console.error("Error fetching graph data:", error.stack);
+    res.status(500).json({ message: "Error fetching graph data", error: error.message });
+  }
+});
+
+// Helper function to merge the results
+function mergeStats(likesStats, favoritesStats) {
+  const merged = {};
+
+  // Add likes to merged object
+  likesStats.forEach(stat => {
+    merged[stat.date] = { likes: stat.likes };
+  });
+
+  // Add favorites to merged object (if any)
+  favoritesStats.forEach(stat => {
+    if (!merged[stat.date]) {
+      merged[stat.date] = { favorites: stat.favorites };
+    } else {
+      merged[stat.date].favorites = stat.favorites;
+    }
+  });
+
+  // Convert merged object into an array for response
+  return Object.keys(merged).map(date => {
+    return {
+      date: date,
+      likes: merged[date].likes || 0,
+      favorites: merged[date].favorites || 0,
+    };
+  });
+}
+
+
+
+
+

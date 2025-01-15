@@ -183,7 +183,32 @@ input[name="job"] {
 .job-dropdown li:hover {
   background-color: #18181881;
 }
+.location-suggestions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 2px solid #303030;
+  border-radius: 10px;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  background: rgb(31, 31, 31);
+  z-index: 1000;
+  width: 380px;
+  overflow: hidden;
+  text-align: center;
+  font-size: 13px;
+  color: gray;
+}
 
+.location-suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.location-suggestion-item:hover {
+  background-color: #060606;
+}
 
 
 @media (max-width: 600px) {
@@ -295,5 +320,22 @@ input[name="job"] {
     max-height: 200px;
     overflow-y: auto;
     margin-bottom: 20px;
+  }
+  .location-suggestions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 2px solid #303030;
+    border-radius: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    background: rgb(31, 31, 31);
+    z-index: 1000;
+    width: 310px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 13px;
+    color: gray;
   }
 }

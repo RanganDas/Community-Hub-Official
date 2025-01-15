@@ -8,6 +8,7 @@ const StoryModal = ({ onClose, onStoryAdded }) => {
   const [caption, setCaption] = useState("");
   const [showImageInput, setShowImageInput] = useState(false); // Controls visibility of image URL input field
 
+  const URL = "https://sparklify-official.onrender.com";
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -21,7 +22,7 @@ const StoryModal = ({ onClose, onStoryAdded }) => {
       }
 
       const response = await axios.post(
-        "https://community-hub-official.onrender.com/api/stories",
+        `${URL}/api/stories`,
         payload,
         {
           headers: {

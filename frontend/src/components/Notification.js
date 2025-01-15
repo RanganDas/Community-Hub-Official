@@ -3,23 +3,25 @@ import axios from "axios";
 import "./Notification.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import io from "socket.io-client";
+
 import { useNavigate } from "react-router-dom";
 
-const socket = io("https://community-hub-official.onrender.com");
+
 
 const Notification = () => {
   const [notifications, setNotifications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hoveredId, setHoveredId] = useState(null);
   const navigate = useNavigate();
+  const URL = "https://sparklify-official.onrender.com";
 
+  
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "https://community-hub-official.onrender.com/notifications",
+          `${URL}/notifications`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -34,23 +36,13 @@ const Notification = () => {
 
     fetchNotifications();
 
-    socket.on("newNotification", (notification) => {
-      setNotifications((prevNotifications) => [
-        ...prevNotifications,
-        notification,
-      ]);
-    });
-
-    return () => {
-      socket.off("newNotification");
-    };
   }, []);
 
   const deleteNotification = async (notificationId) => {
     try {
       const token = localStorage.getItem("token");
       await axios.delete(
-        `https://community-hub-official.onrender.com/notifications/${notificationId}`,
+        `${URL}/notifications/${notificationId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -69,7 +61,7 @@ const Notification = () => {
   const deleteAllNotifications = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete("https://community-hub-official.onrender.com/notifications", {
+      await axios.delete(`${URL}/notifications`, {
         headers: { Authorization: `Bearer ${token}` },
       });
   

@@ -1,7 +1,7 @@
 /* Right Sidebar Styles */
 .right-sidebar {
     font-weight: 100;
-    background: #333;
+    background: #212030;
     color: #fff;
     width: 40px; /* Initial width showing only the Menu text */
     height: 100%;
@@ -167,6 +167,27 @@
   margin-top: 15px;
   color: gray;
 }
+/* Rotating animation */
+/* Styling the settings button */
+.settings-button {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background-color: transparent;
+  border: none;
+  color: #af94ff;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Smooth transition for rotation */
+}
+
+/* Slight rotation on hover */
+.settings-button:hover {
+  transform: rotate(45deg); /* Rotate slightly (20 degrees) */
+ 
+}
+
+
+
 
 @media (min-width: 768px) {
   .profile-buttons {
@@ -181,7 +202,7 @@
     border-left: #4d4d4d solid 1px;
   }
   .profile-image {
-    margin-top: 50px;
+    margin-top: 40px;
     width: 125px; /* Width of the image */
     height: 125px;
     margin-right: 65px;
@@ -222,5 +243,14 @@
     font-weight: 200;
     letter-spacing: 1px;
     padding: 13px 20px 13px;
+  }
+  .settings-button {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    color: #af94ff;
+    cursor: pointer;
   }
 }

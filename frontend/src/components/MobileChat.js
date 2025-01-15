@@ -36,7 +36,7 @@ const MobileChat = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
 
   //const [userName, setUsername] = useState("");
-  const URL = "https://community-hub-official.onrender.com";
+  const URL = "https://sparklify-official.onrender.com";
 
   useEffect(() => {
     const newSocket = io(`${URL}`);
@@ -152,6 +152,18 @@ const MobileChat = () => {
       d1.getDate() === d2.getDate()
     );
   };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/login");
+    } else {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 100);
+    }
+  }, [navigate]);
 
   return (
     <div className="chatroom-wrapper">

@@ -115,7 +115,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px; /* Space between each hashtag box */
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #2d2d2d;
+  padding: 10px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #1e1e1e, #1c1c1c);
 }
 .post-date2 {
   font-family: "Arial", sans-serif; /* Add your preferred font */
@@ -263,5 +266,11 @@ a {
   .post-header {
     padding-bottom: 5px !important;
     margin-bottom: 5px !important;
+  }
+
+  .post-hashtags{
+    background: linear-gradient(180deg, #1e1e1e, #1c1c1c);
+    padding: 10px;
+    border-radius: 20px;
   }
 }

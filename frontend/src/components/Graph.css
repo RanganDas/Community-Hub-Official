@@ -1,0 +1,96 @@
+.graph-wrapper {
+  margin: 20px auto;
+  padding: 20px;
+  background: #1c1b28;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  transition: transform 0.2s ease-in-out;
+  border: #44444497 3px solid;
+  overflow: hidden; /* Prevent content overflow */
+  position: relative; /* Needed for better child alignment */
+}
+
+  
+  .graph-title {
+    text-align: center;
+    font-family: "Arial", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #ececec;
+    margin-bottom: 20px;
+  }
+  
+  canvas {
+    display: block; /* Prevent inline styling issues */
+    width: 100% !important; /* Make it adapt to the parent width */
+    height: 100% !important; /* Let it fill the container's height */
+    max-height: 400px; /* Limit the canvas height */
+  }
+  
+  .chartjs-tooltip {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 10px;
+    text-align: center;
+  }
+  .chartjs-legend {
+    display: flex;
+    flex-direction: column; /* Stack legends vertically */
+    align-items: flex-start; /* Align to the left */
+    gap: 8px; /* Add space between legends */
+  }
+  .current-month {
+    text-align: center;
+    font-size: 14px;
+    color: #e7e7e7;
+    margin: 0 auto; /* Center the element with vertical spacing */
+    margin-top: 10px;
+    display: block;
+    background-color: rgb(40, 31, 51);
+    width: 80px;
+    border-radius: 10px;
+    padding: 5px 8px;
+    
+  }
+    
+
+
+  @media (max-width: 400px) {
+    .graph-wrapper {
+        margin: 20px auto;
+        padding: 20px;
+        background: #1c1b28;
+        border-radius: 12px;
+        height: auto;
+        width: 350px;
+        max-width: 600px;
+        transition: transform 0.2s ease-in-out;
+        border: #39393997 3px solid;
+      }
+      .graph-title {
+        text-align: center;
+        font-family: "Arial", sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        color: #ececec;
+        margin-bottom: 20px;
+      }
+      .chartjs-tooltip {
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        border-radius: 8px;
+        font-size: 10px;
+        padding: 10px;
+        text-align: center;
+      }
+      canvas {
+        max-height: 350px !important; /* Limit height for mobile */
+      }
+
+  }
+
+  
+  

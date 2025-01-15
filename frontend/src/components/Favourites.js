@@ -9,12 +9,13 @@ const Favourites = () => {
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
+  const URL = "https://sparklify-official.onrender.com";
   // Fetch the user ID
   useEffect(() => {
     const fetchUserId = async () => {
       try {
         const response = await axios.get(
-          "https://community-hub-official.onrender.com/api/auth/user",
+          `${URL}/api/auth/user`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -38,7 +39,7 @@ const Favourites = () => {
     const fetchFavoritePosts = async () => {
       try {
         const favoriteResponse = await axios.get(
-          `https://community-hub-official.onrender.com/api/users/favorites/${userId}`,
+          `${URL}/api/users/favorites/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -49,7 +50,7 @@ const Favourites = () => {
         const postIds = favoriteResponse.data;
 
         const postsResponse = await axios.post(
-          "https://community-hub-official.onrender.com/api/posts/details",
+          `${URL}/api/posts/details`,
           { postIds },
           {
             headers: {
@@ -74,7 +75,7 @@ const Favourites = () => {
   const handleFavoriteToggle = async (postId) => {
     try {
       const response = await axios.put(
-        `https://community-hub-official.onrender.com/api/posts/${postId}/favourite`,
+        `${URL}/api/posts/${postId}/favourite`,
         {},
         {
           headers: {

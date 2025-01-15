@@ -16,7 +16,7 @@ import UserModal from "./UserModal";
 const PostCard = ({ post }) => {
   const [likes, setLikes] = useState(post.likes || 0); // Initialize likes from the post
   const [isLiked, setIsLiked] = useState(post.isLiked || false); // Initialize based on backend data
-
+  const URL = "https://sparklify-official.onrender.com";
   const [isFavorite, setIsFavorite] = useState(post.isFavorite || false);
 
   const [favoritesCount, setFavoritesCount] = useState(post.favoritesCount || 0);
@@ -34,7 +34,7 @@ const PostCard = ({ post }) => {
   const fetchUserImage = async () => {
     try {
       const response = await axios.get(
-        `https://community-hub-official.onrender.com/api/users/${post.user?._id}/image`, // Backend route for fetching user image
+        `${URL}/api/users/${post.user?._id}/image`, // Backend route for fetching user image
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -52,7 +52,7 @@ const PostCard = ({ post }) => {
   const handleFavorite = async () => {
     try {
       const response = await axios.put(
-        `https://community-hub-official.onrender.com/api/posts/${post._id}/favourite`,
+        `${URL}/api/posts/${post._id}/favourite`,
         {},
         {
           headers: {
@@ -72,7 +72,7 @@ const PostCard = ({ post }) => {
   const handleLike = async () => {
     try {
       const response = await axios.put(
-        `https://community-hub-official.onrender.com/api/posts/${post._id}/like`,
+        `${URL}/api/posts/${post._id}/like`,
         {},
         {
           headers: {
@@ -93,7 +93,7 @@ const PostCard = ({ post }) => {
   const handleUserClick = async () => {
     try {
       const response = await axios.get(
-        `https://community-hub-official.onrender.com/api/users/${post.user?._id}`, 
+        `${URL}/api/users/${post.user?._id}`, 
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -181,6 +181,7 @@ const PostCard = ({ post }) => {
               alignItems: "center",
               cursor: "pointer",
               fontSize: "1.2rem", // Adjust the size for better appearance
+              marginLeft: "10px",
             }}
             onClick={handleLike}
           >

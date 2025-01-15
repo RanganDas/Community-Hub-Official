@@ -14,12 +14,14 @@ import {
 const UserModal = ({ userInfo, onClose, currentUserId }) => {
   const [isFollowing, setIsFollowing] = useState(false);
 
+  const URL = "https://sparklify-official.onrender.com";
+  
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `https://community-hub-official.onrender.com/user/${userInfo?._id}`,
+          `${URL}/user/${userInfo?._id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -40,7 +42,7 @@ const UserModal = ({ userInfo, onClose, currentUserId }) => {
   const handleFollow = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.post(`https://community-hub-official.onrender.com/follow/${userInfo?._id}`, null, {
+      await axios.post(`${URL}/follow/${userInfo?._id}`, null, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setIsFollowing(true); // Update state to reflect follow action
@@ -56,7 +58,7 @@ const UserModal = ({ userInfo, onClose, currentUserId }) => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        `https://community-hub-official.onrender.com/unfollow/${userInfo?._id}`,
+        `${URL}/unfollow/${userInfo?._id}`,
         null,
         { headers: { Authorization: `Bearer ${token}` } }
       );

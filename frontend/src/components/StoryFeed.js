@@ -5,7 +5,7 @@ import "./StoryFeed.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer,toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 const StoryFeed = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -13,7 +13,7 @@ const StoryFeed = () => {
   const [selectedUserStories, setSelectedUserStories] = useState(null);
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
   const [userId, setUserId] = useState(null); // For logged-in user's ID
-
+  const URL = "https://sparklify-official.onrender.com";
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -26,10 +26,9 @@ const StoryFeed = () => {
     const fetchFollowingStories = async () => {
       try {
         const token = localStorage.getItem("token");
-        const { data } = await axios.get(
-          "https://community-hub-official.onrender.com/api/stories/following",
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
+        const { data } = await axios.get(`${URL}/api/stories/following`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
         // Decode token to get the logged-in user's ID
         const { id } = JSON.parse(atob(token.split(".")[1]));
@@ -56,10 +55,9 @@ const StoryFeed = () => {
   const handleStoryAdded = async () => {
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.get(
-        "https://community-hub-official.onrender.com/api/stories/following",
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const { data } = await axios.get(`${URL}/api/stories/following`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       const { id } = JSON.parse(atob(token.split(".")[1]));
       setUserId(id);
@@ -106,7 +104,7 @@ const StoryFeed = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`https://community-hub-official.onrender.com/api/stories/${storyId}`, {
+      await axios.delete(`${URL}/api/stories/${storyId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -177,26 +175,33 @@ const StoryFeed = () => {
               onStoryAdded={handleStoryAdded}
             />
           )}
-          {groupedStories.map((group) => (
-            <div
-              key={group.user._id}
-              className="story-card-container"
-              onClick={() => handleCardClick(group)}
-            >
-              <div className="story-card">
-                <img
-                  src={group.stories[0].imageUrl}
-                  alt="Story"
-                  className="story-image"
-                />
-              </div>
-              <p className="story-caption">{group.user.username}</p>
-              {/* Display timestamp */}
-              <p className="story-timestamp">
-                {formatTimestamp(group.stories[0].createdAt)}
-              </p>
+
+          {groupedStories.length === 0 ? (
+            // Display this message when no stories are available
+            <div className="no-stories-message" style={{ textAlign: "center", backgroundColor: "#1e1e1e",borderRadius:"10px", padding:"10px" }}>
+              <p>No one posted a story yet</p>
             </div>
-          ))}
+          ) : (
+            groupedStories.map((group) => (
+              <div
+                key={group.user._id}
+                className="story-card-container"
+                onClick={() => handleCardClick(group)}
+              >
+                <div className="story-card">
+                  <img
+                    src={group.stories[0].imageUrl}
+                    alt="Story"
+                    className="story-image"
+                  />
+                </div>
+                <p className="story-caption">{group.user.username}</p>
+                <p className="story-timestamp">
+                  {formatTimestamp(group.stories[0].createdAt)}
+                </p>
+              </div>
+            ))
+          )}
         </div>
       </div>
 

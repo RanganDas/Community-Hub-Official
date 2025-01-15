@@ -11,6 +11,7 @@ const EditModal = ({ post, onClose, onUpdate }) => {
     location: post.location,
     imageUrl: post.imageUrl,
   });
+  const URL = "https://sparklify-official.onrender.com";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,7 +22,7 @@ const EditModal = ({ post, onClose, onUpdate }) => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.put(
-        `https://community-hub-official.onrender.com/api/posts/${post._id}`,
+        `${URL}/api/posts/${post._id}`,
         { ...formData, hashtags: formData.hashtags.split(", ") },
         {
           headers: { Authorization: `Bearer ${token}` },

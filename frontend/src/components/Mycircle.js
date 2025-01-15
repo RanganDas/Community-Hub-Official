@@ -8,7 +8,7 @@ const Mycircle = () => {
   const [followers, setFollowers] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
+  const URL = "https://sparklify-official.onrender.com";
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -21,7 +21,7 @@ const Mycircle = () => {
   const fetchCircleData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("https://community-hub-official.onrender.com/api/mycircle", {
+      const response = await axios.get(`${URL}/api/mycircle`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setFollowing(response.data.following);

@@ -3,12 +3,13 @@
 /* Make the navbar span the full width of the screen */
 .navbar2 {
     width: 100vh;
-    background-color: #333; /* Dark background color */
+    background-color: #1c1b28; /* Dark background color */
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
+    border-bottom: #464646ae 1px solid;
   }
   
   .navbar-container2 {
@@ -50,10 +51,11 @@
   @media (max-width: 400px) {
     .navbar2 {
       width: 100%;
-      background-color: #333; /* Dark background color */
+      background-color: #1c1b28; /* Dark background color */
       margin: none;
       display: flex;
       justify-content: space-between;
+      border-bottom: #464646ae 1px solid;
       align-items: center;
       color: white;
     }
