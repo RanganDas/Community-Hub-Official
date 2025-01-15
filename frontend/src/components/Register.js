@@ -84,6 +84,7 @@ const Register = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            autoComplete="off"
             maxLength="15"
           />
         </div>
@@ -106,13 +107,14 @@ const Register = () => {
           </span>
           <input
           style={{ paddingLeft: "40px" }}
-            autoComplete="new-email"
+            autoComplete="off"
             type="email"
             name="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            
           />
         </div>
         <div style={{ position: "relative" }}>
