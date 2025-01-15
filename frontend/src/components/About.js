@@ -17,18 +17,18 @@ const About = () => {
       {/* Description Section */}
       <div className="about-description">
         <p>
-          Welcome to <strong>Sparklify</strong>, the ultimate platform
-          designed to keep you connected, informed, and engaged with the world
-          around you. Whether you're looking to share your thoughts, connect
-          with friends, or explore stories from a diverse community, Community
-          Hub is your go-to platform for everything social. Here, you can create
-          and share your own stories, connect with like-minded individuals, and
-          stay updated with the latest trends and happenings. Our platform is
-          built with simplicity and functionality in mind, ensuring a seamless
+          Welcome to <strong>Sparklify</strong>, the ultimate platform designed
+          to keep you connected, informed, and engaged with the world around
+          you. Whether you're looking to share your thoughts, connect with
+          friends, or explore stories from a diverse community, Sparklify is
+          your go-to platform for everything social. Here, you can create and
+          share your own stories, connect with like-minded individuals, and stay
+          updated with the latest trends and happenings. Our platform is built
+          with simplicity and functionality in mind, ensuring a seamless
           experience for users of all ages and backgrounds. From sharing your
-          daily updates to engaging with the stories of others, Community Hub
-          empowers you to express yourself freely and creatively. Community Hub
-          is the brainchild of <strong>Rangan Das</strong>, a passionate web
+          daily updates to engaging with the stories of others, Sparklify
+          empowers you to express yourself freely and creatively. Sparklify is
+          the brainchild of <strong>Rangan Das</strong>, a passionate web
           developer with a vision to bring people closer together in an
           ever-evolving digital world. With a strong background in computer
           science and a dedication to crafting meaningful user experiences,
