@@ -46,7 +46,6 @@ const Changepassword = () => {
         }, 3000);
       }
     } catch (error) {
-      
       toast.error(
         error.response?.data?.message || "Failed to update password. Try again."
       );
@@ -74,6 +73,11 @@ const Changepassword = () => {
             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$"
             title="Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one number, and one special character."
           />
+          <small className="password-instructions">
+            Password must be at least 8 characters and include at least one
+            lowercase letter, one uppercase letter, one number, and one special
+            symbol.
+          </small>
           <input
             type="password"
             placeholder="Retype new password"
