@@ -964,19 +964,6 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("userTyping", ({ receiverId, senderName }) => {
-    const receiverSocketId = onlineUsers.get(receiverId);
-    if (receiverSocketId) {
-      io.to(receiverSocketId).emit("userTyping", { senderId: socket.id, senderName });
-    }
-  });
-
-  socket.on("stopTyping", ({ receiverId }) => {
-    const receiverSocketId = onlineUsers.get(receiverId);
-    if (receiverSocketId) {
-      io.to(receiverSocketId).emit("stopTyping");
-    }
-  });
 
   // Handle disconnection
   socket.on("disconnect", () => {

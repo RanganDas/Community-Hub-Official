@@ -21,14 +21,11 @@ const Register = () => {
 
     if (password === confirmPassword) {
       try {
-        const response = await axios.post(
-          `${URL}/api/register`,
-          {
-            username,
-            email,
-            password,
-          }
-        );
+        const response = await axios.post(`${URL}/api/register`, {
+          username,
+          email,
+          password,
+        });
 
         if (response.status === 201) {
           sessionStorage.setItem("email", email);
@@ -106,7 +103,7 @@ const Register = () => {
             />
           </span>
           <input
-          style={{ paddingLeft: "40px" }}
+            style={{ paddingLeft: "40px" }}
             autoComplete="off"
             type="email"
             name="email"
@@ -114,7 +111,6 @@ const Register = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            
           />
         </div>
         <div style={{ position: "relative" }}>
@@ -129,29 +125,30 @@ const Register = () => {
             }}
           >
             <FontAwesomeIcon
-              icon={faLock} style={{ color: "gray" }} size="lg"
+              icon={faLock}
+              style={{ color: "gray" }}
+              size="lg"
             />
           </span>
-        
-            
-        <input
-        style={{ paddingLeft: "40px" }}
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-          title="Must contain at least one lowercase letter, one uppercase letter, one number, one special character, and be at least 8 characters long"
-          required
-        />
+
+          <input
+            style={{ paddingLeft: "40px" }}
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+            title="Must contain at least one lowercase letter, one uppercase letter, one number, one special character, and be at least 8 characters long"
+            required
+          />
         </div>
         <small className="password-instructions">
           Password must be at least 8 characters and include at least one
           lowercase letter, one uppercase letter, one number, and one special
           symbol.
         </small>
-          <div style={{ position: "relative" }}>
+        <div style={{ position: "relative" }}>
           <span
             className="input-icon"
             style={{
@@ -163,20 +160,22 @@ const Register = () => {
             }}
           >
             <FontAwesomeIcon
-              icon={faLock} style={{ color: "gray" }} size="lg"
+              icon={faLock}
+              style={{ color: "gray" }}
+              size="lg"
             />
           </span>
-            
-        <input
-        style={{ paddingLeft: "40px" }}
-          type="password"
-          name="confirmPassword"
-          placeholder="Retype Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-</div>
+
+          <input
+            style={{ paddingLeft: "40px" }}
+            type="password"
+            name="confirmPassword"
+            placeholder="Retype Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+        </div>
         <button style={{ background: "green" }} type="submit">
           Register
         </button>

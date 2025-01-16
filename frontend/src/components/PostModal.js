@@ -110,6 +110,7 @@ const PostModal = ({ isOpen, onClose, onPostCreated }) => {
             className="unique-input-field"
             autoComplete="off"
             maxLength={50}
+            required
           />
           <div className="unique-image-preview-container">
             <img
@@ -135,6 +136,7 @@ const PostModal = ({ isOpen, onClose, onPostCreated }) => {
             className="unique-textarea-field"
             autoComplete="off"
             maxLength={300}
+            required
           ></textarea>
           <input
             type="text"
