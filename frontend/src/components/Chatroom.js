@@ -81,7 +81,7 @@ const Chatroom = () => {
     }
 
     const chatId = [userId, friendId].sort().join("_");
-    console.log("Generated chatId:", chatId);
+    //console.log("Generated chatId:", chatId);
 
     try {
       const response = await axios.get(`${URL}/api/chats`, {
@@ -90,7 +90,7 @@ const Chatroom = () => {
       });
 
       if (response.data && response.data.length > 0) {
-        console.log("Fetched messages:", response.data);
+        //console.log("Fetched messages:", response.data);
         setMessages(response.data);
       } else {
         console.log("No messages found for this chat.");
