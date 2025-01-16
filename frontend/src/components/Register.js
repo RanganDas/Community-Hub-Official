@@ -13,7 +13,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
-
+  const URL = "https://sparklify-official.onrender.com";
   const handleSubmit = async (e) => {
     e.preventDefault();
 
