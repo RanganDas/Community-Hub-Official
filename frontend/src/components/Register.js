@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -14,10 +15,21 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
+  // Password validation function
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //const notify = () => toast("Wow so easy!");
+    if (!validatePassword(password)) {
+      toast.error(
+        "Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, one number, and one special character."
+      );
+      return;
+    }
 
     if (password === confirmPassword) {
       try {
@@ -29,18 +41,14 @@ const Register = () => {
 
         if (response.status === 201) {
           sessionStorage.setItem("email", email);
-          // In register.js or login.js
           sessionStorage.setItem("isPendingVerification", "true");
 
-          // If registration is successful, show alert
-          toast.success("A verification code has been sent to your email."); // Success message from server
-
+          toast.success("A verification code has been sent to your email.");
           setTimeout(() => {
-            navigate("/verify"); // Redirect to login page after success
+            navigate("/verify");
           }, 4000);
         }
       } catch (error) {
-        // Handle email already exists error
         if (error.response && error.response.status === 409) {
           toast.error("Email already exists");
         } else {
@@ -138,8 +146,6 @@ const Register = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-            title="Must contain at least one lowercase letter, one uppercase letter, one number, one special character, and be at least 8 characters long"
             required
           />
         </div>
@@ -210,7 +216,6 @@ const Register = () => {
         </button>
       </form>
 
-      {/* ToastContainer for displaying toasts */}
       <ToastContainer
         position="top-center"
         autoClose={3000}
