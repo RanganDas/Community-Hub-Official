@@ -142,12 +142,13 @@ const Register = () => {
             title="Must contain at least one lowercase letter, one uppercase letter, one number, one special character, and be at least 8 characters long"
             required
           />
-        </div>
-        <p className="password-instructions">
+          <p className="password-instructions">
           Password must be at least 8 characters and include at least one
           lowercase letter, one uppercase letter, one number, and one special
           symbol.
         </p>
+        </div>
+        
         <div style={{ position: "relative" }}>
           <span
             className="input-icon"
