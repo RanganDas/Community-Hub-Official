@@ -22,6 +22,8 @@ import Forgetpassword from './components/Forgetpassword';
 import VerifyPassword from './components/VerifyPassword';
 import Changepassword from './components/Changepassword';
 import Settings from './components/Settings';
+
+import StarPostFetch from './StarPostFetch';
 function App() {
 
   useTokenExpirationCheck();
@@ -51,6 +53,7 @@ function App() {
           <Route path="/verify-password" element={<VerifyPassword />} />
           <Route path="/change-password" element={<Changepassword />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/starpost" element={<StarPostFetch />} />
 
 
         </Routes>
